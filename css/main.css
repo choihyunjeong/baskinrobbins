@@ -23,7 +23,7 @@ body {
     height: 70px;
     margin-top: -42px;
     margin-left: -6px;
-    background: url(../img/cursor.svg) center center / contain no-repeat;
+    background: url(../img/cursor-dp.svg) center center / contain no-repeat;
     border-radius: 50%;
     transition: transform 0.3s ease;
     transform-origin: center center;
