@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'GumiRomance';
+    src: url('GumiRomanceTTF.eot');
+    src: url('GumiRomanceTTF.eot?#iefix') format('embedded-opentype'),
+        url('GumiRomanceTTF.woff2') format('woff2'),
+        url('GumiRomanceTTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

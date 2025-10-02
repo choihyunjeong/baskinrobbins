@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배스킨라빈스</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/GSDevTools.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathHelper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Physics2DPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+    <!-- CustomBounce requires CustomEase -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomBounce.min.js"></script>
+    <!-- CustomWiggle requires CustomEase -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomWiggle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="js/rotateslide.js"></script>
+
+    <script>
+        window.onload = () => {
+            gsap.registerPlugin(
+                //SplitText,
+                DrawSVGPlugin,
+                GSDevTools,
+                MotionPathPlugin,
+                MotionPathHelper
+            );
+
+            gsap.set("#plane", { opacity: 0 });
+            gsap.set(".main_visual .container", { opacity: 1 });
+            gsap.set(".main_visual .confetti img", { scale: "random(0.1, 1)", opacity: 0 });
+            //Create a custom bounce ease:
+            CustomBounce.create("myBounce", { strength: 0.6, squash: 3 });
+            CustomWiggle.create("myWiggle", { wiggles: 6 });
+
+            let tl = gsap.timeline({ delay: 0.2 });
+            tl.addLabel("explode", 1)
+            tl.addLabel("flight", 1.3)
+
+                .from("#main", { duration: 1, opacity: 0, y: -2000, ease: "myBounce" }, 0.5)
+                .to(
+                    "#main",
+                    {
+                        duration: 1,
+                        scaleX: 0,
+                        scaleY: 0,
+                        ease: "myBounce-squash",
+                        transformOrigin: "center bottom"
+                    },
+                    0.5
+                )
+                .set("#plane", { opacity: 1 }, "flight")
+                .from("#path", { duration: 0.5, drawSVG: 0 }, "explode")
+                .from("#path_2", { duration: 2, drawSVG: 0 }, "flight")
+                .from(
+                    "#plane",
+                    {
+                        duration: 2,
+                        ease: "sine.inOut",
+                        scale: 0.2,
+                        transformOrigin: "center center",
+                        motionPath: {
+                            path: "M973.861,226.794 C1015.92,240.459 1041.39,136.212 1005.93,135.899 977.513,135.649 990.28,214.204 1046.61,229.17 1089.82,240.65 1168.88,147.886 1092.89,84.6262 1029.602,31.94758 1030.243,386.698 1468.054,74.047 1565.737,4.289 1789.737,-299.704 2163.504,-225.675 ",
+                            align: "#path_2",
+                            alignOrigin: [0.5, 0.5],
+                            autoRotate: 180,
+                            start: 1,
+                            end: 0
+                        }
+                    }, "flight"
+                )
+                .to(
+                    ".innerplane",
+                    {
+                        duration: 1.5,
+                        opacity: 0,
+                    },
+                    2
+                )
+                .set(".main_visual .confetti img", { opacity: 1 }, "explode+=.2")
+                .to(
+                    ".main_visual .confetti img",
+                    {
+                        duration: 2,
+                        rotation: "random(-360, 360)",
+                        scale: "random(0.5, 1)",
+                        physics2D: {
+                            velocity: "random(800, 2000)",
+                            angle: "random(150, 360)",
+                            gravity: 3000,
+                            acceleration: 100
+                        }
+                    },
+                    "explode+=.2"
+                )
+                .from(
+                    "#wiggle",
+                    {
+                        duration: 0.7,
+                        transformOrigin: "center center",
+                        scale: 0,
+                        rotation: 60,
+                        ease: "back.out(4)"
+                    },
+                    "explode+=.4"
+                )
+                .from(
+                    "#bang, #text",
+                    {
+                        duration: 0.7,
+                        transformOrigin: "center center",
+                        scale: 0,
+                        rotation: -60,
+                        ease: "back.out(4)"
+                    },
+                    "explode+=.1"
+                )
+                .from(
+                    "#spin, #main",
+                    {
+                        duration: 0.7,
+                        transformOrigin: "center center",
+                        scale: 0,
+                        rotation: -60,
+                        ease: "back.out(4)"
+                    },
+                    "explode+=.1"
+                )
+                .from(
+                    ".sprinkle",
+                    {
+                        scale: 0,
+                        rotation: 360,
+                        transformOrigin: "center center",
+                        ease: "back.out"
+                    },
+                    "explode"
+                )
+
+            document.querySelector('.main_visual').addEventListener("click", (e) => {
+                tl.play(0)
+            })
+
+            var swiper = new Swiper(".newSwiper", {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                centeredSlides: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+
+            let curtainBtn = document.querySelector('.curtain_btn');
+            let curtainLeft = document.querySelector('.curtain.left');
+            let curtainRight = document.querySelector('.curtain.right');
+            let decoTop = document.querySelector('.deco-top');
+            let decoLeft = document.querySelector('.deco-left');
+            let decoRight = document.querySelector('.deco-right');
+            let benefitSprinkle = document.querySelector('.benefit .top');
+            let benefitList = document.querySelector('.benefit .list');
+            let topBtn = document.querySelector('.top_btn');
+
+
+
+            window.addEventListener('scroll', () => {
+                let scrollBar = window.scrollY
+                if (scrollBar < 1500) {
+                    curtainBtn.classList.remove('act');
+                    curtainLeft.classList.remove('act');
+                    curtainRight.classList.remove('act');
+                    decoTop.classList.remove('act');
+                    decoLeft.classList.remove('act');
+                    decoRight.classList.remove('act');
+                }
+                if (scrollBar < 4100) {
+                    benefitSprinkle.classList.remove('act');
+                    benefitList.classList.remove('act');
+                }
+                if (scrollBar > 4300) {
+                    benefitSprinkle.classList.add('act');
+                    benefitList.classList.add('act');
+                }
+                if(scrollBar < 6200) {
+                    topBtn.classList.remove('act');
+                }
+                if (scrollBar > 6300) {
+                    topBtn.classList.add('act');
+                }
+
+                console.log(scrollBar);
+            });
+
+            curtainBtn.addEventListener('click', () => {
+                curtainBtn.classList.add('act');
+                curtainLeft.classList.add('act');
+                curtainRight.classList.add('act');
+                decoTop.classList.add('act');
+                decoLeft.classList.add('act');
+                decoRight.classList.add('act');
+            });
+
+
+
+            console.clear();
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            const list = document.querySelector(".pin-section .better-list");
+            const fill = document.querySelector(".pin-section .fill");
+            const listItems = gsap.utils.toArray(".pin-section li", list);
+            const slides = gsap.utils.toArray(".slide");
+
+            const pinSections = gsap.utils.toArray(".pin-section");
+            const lists = gsap.utils.toArray(".list");
+            const tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".pin-section",
+                    start: "top top",
+                    end: /* "+=" + listItems.length * 50 + "%" */ "100%",
+                    /* markers: {
+                        startColor: 'yellow',
+                        endColor: 'red',
+                        fontSize: '4rem',
+                        indent: 200
+                    }, */
+                    pin: true,
+                    scrub: true
+                    // markers: true
+
+                }
+
+            });
+            // First element visible, set the marker
+            fill &&
+                gsap.set(fill, {
+                    scaleY: 0.5 / listItems.length,
+                    transformOrigin: "top left"
+                });
+
+            listItems.forEach((item, i) => {
+                const previousItem = listItems[i - 1];
+                if (previousItem) {
+                    tl2.set(item, { color: "#FF5484", fontSize: "70px" }, 0.5 * i)
+                        .to(
+                            slides[i],
+                            {
+                                autoAlpha: 1,
+                                duration: 0.2
+                            },
+                            "<"
+                        )
+                        .set(previousItem, { color: "#ccc", fontSize: "30px" }, "<")
+                        .to(
+                            slides[i - 1],
+                            {
+                                autoAlpha: 0,
+                                duration: 0.2
+                            },
+                            "<"
+                        );
+                } else {
+                    gsap.set(item, { color: "#FF5484", fontSize: "70px" });
+                    gsap.set(slides[i], { autoAlpha: 1 });
+                }
+            });
+            tl2.to(
+                fill,
+                {
+                    scaleY: 0.5,
+                    transformOrigin: "top left",
+                    ease: "none",
+                    duration: tl2.duration()
+                },
+                0
+            ).to({}, {}); // add a small pause at the end of the timeline before it un-pins
+
+            let cursor = document.querySelector('.cursor');
+            let mouseX = 0;
+            let mouseY = 0;
+
+            gsap.to({}, 0.016, {
+                repeat: -1,
+                onRepeat: function () {
+                    gsap.set(cursor, {
+                        css: {
+                            left: mouseX,
+                            top: mouseY,
+                        }
+                    })
+                }
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            })
+
+
+            let selectBtn = document.querySelector('.select_btn');
+            let selectList = document.querySelector('.select');
+            
+            selectBtn.addEventListener('click', () => {
+                selectList.classList.toggle('act');
+            });
+
+
+        };
+
+    </script>
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <header class="header">
+        <div class="inner">
+            <h1 class="logo">
+                <img src="img/BR-logo.svg" alt="logo">
+            </h1><!-- .logo end -->
+            <nav class="nav">
+                <ul class="gnb">
+                    <li><a href="#">BR Menu</a></li>
+                    <li><a href="#">BR Play</a></li>
+                    <li><a href="#">Delivery/Store</a></li>
+                    <li><a href="#">BR Story</a></li>
+                    <li><a href="#">BR News</a></li>
+                </ul><!-- .gnb end -->
+                <button class="search">
+                    <img src="img/icon-search.svg" alt="search">
+                </button><!-- .search end -->
+            </nav><!-- .nav end -->
+        </div><!-- .inner end -->
+    </header><!-- .header end -->
+    <main class="main">
+        <section class="main_visual">
+            <div class="inner">
+                <div class="container" role="image"
+                    aria-label="a big colourful confetti explosion and text saying free for all">
+                    <svg id="explode" viewBox="0 -50 1920 960" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g id="GSAP_GTM_blog_hero_2400x1260">
+                            <g id="wiggle">
+                                <image class="sprinkle" href="img/main-img1.png" x="738" y="120" width="400"
+                                    height="600" />
+                            </g>
+                            <g id="bang">
+                                <g id="Vector">
+                                    <path
+                                        d="M833.956 626.101L747.149 801.943C745.505 805.265 749.467 808.518 752.373 806.239L932.942 664.473C934.689 663.099 937.25 663.708 938.201 665.725L981.674 758.526C983.006 761.361 987.106 761.117 988.092 758.143L1032.59 623.926C1033.4 621.474 1036.49 620.743 1038.31 622.569L1166.26 751.22C1169.02 754.003 1173.56 750.733 1171.79 747.202L1087.08 576.839C1085.69 574.073 1088.34 570.995 1091.26 571.986L1216.42 613.942C1219.88 615.107 1222.55 610.776 1219.97 608.184L1087.3 474.785C1085.49 472.959 1086.21 469.845 1088.65 469.027L1210.09 428.324C1213.81 427.072 1212.93 421.54 1209 421.54H1089.81C1087.04 421.54 1085.4 418.444 1086.94 416.13L1174.11 284.645C1176.08 281.67 1172.86 278 1169.68 279.6L988.922 370.47C987.036 371.409 984.753 370.47 984.096 368.452L939.654 234.374C938.599 231.209 934.136 231.209 933.098 234.374L889.158 366.921C888.345 369.374 885.248 370.104 883.432 368.278L798.528 282.905C796.019 280.383 791.833 282.818 792.732 286.262L825.998 411.382C826.777 414.304 823.75 416.757 821.068 415.382L662.071 333.176C658.56 331.367 655.256 335.924 658.041 338.725L785.432 466.818C787.248 468.645 786.522 471.758 784.083 472.576L662.642 513.279C658.923 514.532 659.805 520.063 663.732 520.063H787.629C790.431 520.063 792.075 523.229 790.466 525.542L697.414 659.22C695.493 661.968 698.175 665.586 701.34 664.508L829.752 621.265C832.676 620.273 835.323 623.335 833.956 626.118V626.101Z"
+                                        fill="url(#paint0_linear_6028_4729)" />
+                                    <path
+                                        d="M833.956 626.101L747.149 801.943C745.505 805.265 749.467 808.518 752.373 806.239L932.942 664.473C934.689 663.099 937.25 663.708 938.201 665.725L981.674 758.526C983.006 761.361 987.106 761.117 988.092 758.143L1032.59 623.926C1033.4 621.474 1036.49 620.743 1038.31 622.569L1166.26 751.22C1169.02 754.003 1173.56 750.733 1171.79 747.202L1087.08 576.839C1085.69 574.073 1088.34 570.995 1091.26 571.986L1216.42 613.942C1219.88 615.107 1222.55 610.776 1219.97 608.184L1087.3 474.785C1085.49 472.959 1086.21 469.845 1088.65 469.027L1210.09 428.324C1213.81 427.072 1212.93 421.54 1209 421.54H1089.81C1087.04 421.54 1085.4 418.444 1086.94 416.13L1174.11 284.645C1176.08 281.67 1172.86 278 1169.68 279.6L988.922 370.47C987.036 371.409 984.753 370.47 984.096 368.452L939.654 234.374C938.599 231.209 934.136 231.209 933.098 234.374L889.158 366.921C888.345 369.374 885.248 370.104 883.432 368.278L798.528 282.905C796.019 280.383 791.833 282.818 792.732 286.262L825.998 411.382C826.777 414.304 823.75 416.757 821.068 415.382L662.071 333.176C658.56 331.367 655.256 335.924 658.041 338.725L785.432 466.818C787.248 468.645 786.522 471.758 784.083 472.576L662.642 513.279C658.923 514.532 659.805 520.063 663.732 520.063H787.629C790.431 520.063 792.075 523.229 790.466 525.542L697.414 659.22C695.493 661.968 698.175 665.586 701.34 664.508L829.752 621.265C832.676 620.273 835.323 623.335 833.956 626.118V626.101Z"
+                                        fill="url(#pattern)" fill-opacity="0.6" />
+                                </g>
+                            </g>
+                            <path class="sprinkle"
+                                d="M733.022 222.569L709.927 203.163C709.819 203.073 709.659 203.087 709.569 203.194L690.163 226.289C690.073 226.397 690.087 226.556 690.194 226.647L713.29 246.052C713.397 246.143 713.557 246.129 713.647 246.021L733.053 222.926C733.143 222.819 733.129 222.659 733.022 222.569Z"
+                                fill="#DEC0FC" />
+                            <path id="path"
+                                d="M538.5 556.481C565.165 497.803 621.326 446.333 685.817 449.897C742.695 453.011 791.23 499.923 807.851 554.295C822.28 601.485 806.483 665.329 758.267 675.637C710.051 685.944 669.808 635.984 657.212 588.396C638.16 517.04 652.243 437.987 694.679 377.68C737.115 317.374 806.881 277.006 880.5 270.501"
+                                stroke="#96D7D3" stroke-width="12" stroke-miterlimit="10" stroke-linecap="round" />
+                            <path class="sprinkle" d="M1172.43 119.19C1161.04 107.84 1141.32 122.2 1150.1 137.037"
+                                stroke="#FF783E" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle class="sprinkle" cx="1207.5" cy="320.501" r="28.5" fill="#FDECCC" />
+                            <image class="sprinkle" href="img/biscuit1.png" x="730" y="100" width="100" height="289" />
+                            <image id="spin" href="img/chocolate1.png" x="1120" y="160" width="100" height="289" />
+                            <image id="spin" href="img/biscuit2.png" x="990" y="200" width="80" height="289" />
+                            <image class="sprinkle" href="img/chocolate2.png" x="870" y="250" width="50" height="289" />
+                            <image id="spin" href="img/hzimg2.png" x="1080" y="400" width="50" height="289" />
+                            <image class="sprinkle" href="img/hzimg1.png" x="750" y="200" width="40" height="289" />
+                            <image id="spin" href="img/hzimg3.png" x="700" y="370" width="40" height="289" />
+                            <g id="plane">
+                                <g class="innerplane">
+                                    <image href="img/hzimg3.png" width="100" height="289" />
+                                </g>
+                            </g>
+                            <path id="path_2"
+                                d="M973.861 226.794C1015.92 240.459 1041.39 136.212 1005.93 135.899C977.513 135.649 990.28 214.204 1046.61 229.17C1089.82 240.65 1168.88 147.886 1092.89 84.6262C1022.57 26.0944 1052.01 288.336 1197.12 209.704"
+                                stroke="#9CD38C" stroke-width="3" stroke-miterlimit="10" />
+                            <path class="sprinkle"
+                                d="M1209.36 520.058C1200.77 520.837 1192.24 522.07 1183.8 523.845C1177.31 525.218 1179.8 535.21 1186.31 533.855C1193.88 532.265 1201.5 531.082 1209.21 530.374C1215.74 529.778 1215.98 519.458 1209.36 520.058Z"
+                                fill="#F4AF38" stroke="#F4AF38" stroke-width="1.5" stroke-miterlimit="10" />
+                            <path class="sprinkle"
+                                d="M816.237 177.713C818.964 185.892 822.12 193.912 825.782 201.719C828.608 207.725 837.761 203.006 834.952 196.986C831.668 189.98 828.767 182.829 826.312 175.491C824.233 169.269 814.133 171.4 816.237 177.713Z"
+                                fill="#F2798F" stroke="#F2798F" stroke-width="1.5" stroke-miterlimit="10" />
+                            <path class="sprinkle"
+                                d="M1155.56 507.934C1152.64 507.082 1150.25 508.853 1149.16 511.444C1147.18 516.21 1145.2 520.99 1143.2 525.751C1142.12 528.327 1144.25 531.431 1146.71 532.149C1149.63 533.001 1152.02 531.229 1153.11 528.638C1155.09 523.873 1157.07 519.107 1159.07 514.331C1160.15 511.755 1158.02 508.651 1155.56 507.934Z"
+                                fill="#F6C4BE" stroke="#F6C4BE" stroke-width="1.5" stroke-miterlimit="10" />
+                            <path class="sprinkle"
+                                d="M816.771 232.868C816.612 235.909 818.885 237.83 821.654 238.29C826.748 239.127 831.856 239.965 836.948 240.817C839.703 241.276 842.237 238.494 842.371 235.933C842.53 232.892 840.257 230.971 837.487 230.511C832.394 229.674 827.3 228.837 822.193 227.984C819.438 227.525 816.905 230.306 816.771 232.868Z"
+                                fill="#FFD183" stroke="#FFD183" stroke-width="1.5" stroke-miterlimit="10" />
+                            <path class="sprinkle"
+                                d="M1155.78 596.226L1147.07 574.282C1146.03 571.668 1142.31 571.051 1140.07 572.243C1137.37 573.689 1137.01 576.679 1138.03 579.241C1140.95 586.559 1143.84 593.872 1146.74 601.186C1147.78 603.8 1151.51 604.417 1153.74 603.225C1156.45 601.778 1156.8 598.789 1155.78 596.226Z"
+                                fill="#594438" stroke="#594438" stroke-width="1.5" stroke-miterlimit="10" />
+                            <path id="line_b_1" class="sprinkle"
+                                d="M946.737 711.212C949.464 719.39 952.62 727.411 956.282 735.218C959.108 741.223 968.261 736.505 965.452 730.485C962.168 723.479 959.267 716.328 956.812 708.99C954.733 702.768 944.633 704.899 946.737 711.212Z"
+                                fill="#F2DAAC" stroke="#F2DAAC" stroke-width="1.5" stroke-miterlimit="10" />
+                            <path class="sprinkle"
+                                d="M823.961 771.534C820.994 776.919 818.34 782.573 816.071 788.532C814.331 793.123 821.749 798.298 823.506 793.714C825.543 788.368 827.863 783.26 830.521 778.421C832.776 774.321 826.252 767.377 823.961 771.534Z"
+                                fill="#B36648" stroke="#B36648" stroke-width="1.5" stroke-miterlimit="10" />
+                            <g id="main">
+                                <image href="img/Group 60.png" x="758" y="390" />
+                            </g><!-- #main end -->
+                            <text id="text" x="738" y="120" text-anchor="middle" font-size="60" fill="#F2B3BF">이달의
+                                맛?</text>
+                        </g><!-- #GSAP_GTM_blog_hero_2400x1260 end -->
+                        <defs>
+                            <linearGradient id="paint0_linear_6028_4729" x1="341.328" y1="165.489" x2="1348.16"
+                                y2="553.463" gradientUnits="userSpaceOnUse">
+                                <stop offset="0.427083" stop-color="#FF8709" />
+                                <stop offset="0.791667" stop-color="#F7BDF8" />
+                            </linearGradient>
+                            <linearGradient id="paint1_linear_6028_4729" x1="695.52" y1="382.901" x2="1221.75"
+                                y2="474.027" gradientUnits="userSpaceOnUse">
+                                <stop offset="0.0242443" stop-color="#0A157A" />
+                                <stop offset="0.93898" stop-color="#9D95FF" />
+                            </linearGradient>
+                            <linearGradient id="paint2_linear_6028_4729" x1="1215.64" y1="306.624" x2="1025.13"
+                                y2="256.799" gradientUnits="userSpaceOnUse">
+                                <stop offset="0.26957" stop-color="#FEC5FB" />
+                                <stop offset="0.838196" stop-color="#00BAE2" />
+                            </linearGradient>
+                            <linearGradient id="paint0_linear_559_5280" x1="413" y1="107" x2="-14.5" y2="578"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#1A3E81" />
+                                <stop offset="0.399038" stop-color="#F2B3BF" />
+                                <stop offset="0.629808" stop-color="#F2B3BF" />
+                                <stop offset="1" stop-color="#1E4387" />
+                            </linearGradient>
+                            <linearGradient id="paint1_linear_559_5280" x1="0" y1="575" x2="400" y2="575"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#1E4387" />
+                                <stop offset="1" stop-color="#F2B3BF" />
+                            </linearGradient>
+                        </defs>
+                    </svg><!-- #explode end -->
+                </div><!-- .container end -->
+                <div class="confetti">
+                    <img src="https://assets.codepen.io/16327/2D-circles.png" />
+                    <img src="https://assets.codepen.io/16327/2D-keyframe.png" />
+                    <img src="https://assets.codepen.io/16327/2D-lightning.png" />
+                    <img src="https://assets.codepen.io/16327/2D-star.png" />
+                    <img src="https://assets.codepen.io/16327/2D-flower.png" />
+                    <img src="https://assets.codepen.io/16327/3D-cone.png" />
+                    <img src="https://assets.codepen.io/16327/3D-spiral.png" />
+                    <img src="https://assets.codepen.io/16327/3D-spiral.png" />
+                    <img src="https://assets.codepen.io/16327/3D-tunnel.png" />
+                    <img src="https://assets.codepen.io/16327/3D-hoop.png" />
+                    <img src="https://assets.codepen.io/16327/3D-semi.png" />
+                    <img src="https://assets.codepen.io/16327/2D-circles.png" />
+                    <img src="https://assets.codepen.io/16327/2D-keyframe.png" />
+                    <img src="https://assets.codepen.io/16327/2D-lightning.png" />
+                    <img src="https://assets.codepen.io/16327/2D-star.png" />
+                    <img src="https://assets.codepen.io/16327/2D-flower.png" />
+                    <img src="https://assets.codepen.io/16327/3D-cone.png" />
+                    <img src="https://assets.codepen.io/16327/3D-spiral.png" />
+                    <img src="https://assets.codepen.io/16327/3D-spiral.png" />
+                    <img src="https://assets.codepen.io/16327/3D-tunnel.png" />
+                    <img src="https://assets.codepen.io/16327/3D-hoop.png" />
+                    <img src="https://assets.codepen.io/16327/3D-semi.png" />
+                </div><!-- confetti end -->
+            </div><!-- .inner end -->
+        </section><!-- .main_visual end -->
+
+        <section class="new_menu">
+            <div class="swiper newSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+
+                        <div class="current">
+                            <img src="img/new1.png" alt="new-menu1">
+                            <img class="cone" src="img/img_cone.png" alt="img_cone">
+                            <div class="text_wrap">
+                                <h3>위대한 비쵸비</h3>
+                                <p>비스킷 & 헤이즐넛 초콜릿 아이스크림에<br />
+                                    달콤바삭한 비스킷과 초콜릿 청크가 쏙쏙!</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new2.png" alt="new-menu2">
+                            <img class="cone" src="img/img_cone.png" alt="img_cone">
+                        </div><!-- .img end -->
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new1.png" alt="new-menu1">
+                            <img class="cone" src="img/img_cone.png" alt="img_cone">
+                        </div><!-- prev end -->
+                        <div class="current">
+                            <img src="img/new2.png" alt="new-menu2">
+                            <img class="cone" src="img/img_cone.png" alt="img_cone">
+                            <div class="text_wrap">
+                                <h3>아몬드 봉봉</h3>
+                                <p>맛은 그대로! 당류 & 칼로리는 더 가볍게~<br />
+                                    자사 기존제품 대비 당류 30%, 칼로리 48% 낮아진 아몬드 봉봉</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new3.png" alt="new-menu3">
+                        </div><!-- .img end -->
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new2.png" alt="new-menu2">
+                            <img class="cone" src="img/img_cone.png" alt="img_cone">
+                        </div><!-- .prev end -->
+                        <div class="current">
+                            <img src="img/new3.png" alt="new-menu3">
+                            <div class="text_wrap">
+                                <h3>더 듬뿍 프루티 케이크</h3>
+                                <p>달콤상큼한 여름 제철 과일 샤베트가 듬뿍!</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new4.png" alt="new-menu4">
+                        </div><!-- .next end -->
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new3.png" alt="new-menu3">
+                        </div>
+                        <div class="current">
+                            <img src="img/new4.png" alt="new-menu4">
+                            <div class="text_wrap">
+                                <h3>더 듬뿍 딸기 케이크</h3>
+                                <p>상큼한 딸기와 고소한 우유 풍미가 더 듬뿍!</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new5.png" alt="new-menu5">
+                        </div>
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new4.png" alt="new-menu4">
+                        </div>
+                        <div class="current">
+                            <img src="img/new5.png" alt="new-menu5">
+                            <div class="text_wrap">
+                                <h3>민트 초콜릿 칩 미니 케이크</h3>
+                                <p>가볍게 한 입, 시원한 민트 초콜릿 칩!</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new6.png" alt="new-menu6">
+                        </div>
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new5.png" alt="new-menu5">
+                        </div>
+                        <div class="current">
+                            <img src="img/new6.png" alt="new-menu6">
+                            <div class="text_wrap">
+                                <h3>엄마는 외계인 미니 케이크</h3>
+                                <p>가볍게 한 입, 달콤한 엄마는 외계인 케이크</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new7.png" alt="new-menu7">
+                        </div>
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new6.png" alt="new-menu6">
+                        </div>
+                        <div class="current">
+                            <img src="img/new7.png" alt="new-menu7">
+                            <div class="text_wrap">
+                                <h3>더 듬뿍 설향딸기 컵빙수</h3>
+                                <p>혼자서 즐길 수 있는 컵 사이즈로 딸기 샤베트와 과육,<br />
+                                    연유의 조합으로 완벽한 궁합을 이루는 ´더 듬뿍 설향딸기 컵빙수´</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new8.png" alt="new-menu8">
+                        </div>
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new7.png" alt="new-menu7">
+                        </div>
+                        <div class="current">
+                            <img src="img/new8.png" alt="new-menu8">
+                            <div class="text_wrap">
+                                <h3>더 듬뿍 설향딸기 빙수</h3>
+                                <p>딸기보다 더 딸기 같은 샤베트와 딸기과육,<br />
+                                    연유의 조합으로 완벽한 궁합을 이루는 ´더 듬뿍 설향딸기 빙수´</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new9.png" alt="new-menu9">
+                        </div>
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new8.png" alt="new-menu8">
+                        </div>
+                        <div class="current">
+                            <img src="img/new9.png" alt="new-menu9">
+                            <div class="text_wrap">
+                                <h3>더 듬뿍 칸탈로프 멜론 컵빙수</h3>
+                                <p>혼자서 즐길 수 있는 컵 사이즈로 칸탈로프 멜론 다이스&아이스크림의<br />
+                                    조화로 풍부한 과즙과 풍미가 느껴지는 ´더 듬뿍 칸탈로프 멜론 컵빙수´</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                        <div class="next">
+                            <img src="img/new10.png" alt="new-menu10">
+                        </div>
+                    </div><!-- .swiper-slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="prev">
+                            <img src="img/new9.png" alt="new-menu9">
+                        </div>
+                        <div class="current">
+                            <img src="img/new10.png" alt="new-menu10">
+                            <div class="text_wrap">
+                                <h3>더 듬뿍 칸탈로프 멜론 빙수</h3>
+                                <p>칸탈로프 멜론 다이스와 아이스크림 우유 얼음의 조화로<br />
+                                    풍부한 과즙과 깊은 풍미가 느껴지는 ´더 듬뿍 칸탈로프 멜론 빙수´</p>
+                            </div><!-- .text_wrap end -->
+                        </div><!-- .current -->
+                    </div><!-- .swiper-slide end -->
+
+                </div><!-- .swiper-wrapper end -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div><!-- .swiper.newSwiper end -->
+
+        </section><!-- .new_menu end -->
+
+        <div class="banner_b">
+            <ul>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">추석 사전예약 할인</li>
+            </ul>
+        </div><!-- .banner_b1 end -->
+
+        <section class="brplay">
+            <div class="inner">
+                <div class="curtain_wrap">
+                    <div class="left curtain">
+                        <img src="img/curtain-left.png" alt="curtain-left">
+                    </div>
+                    <div class="right curtain">
+                        <img src="img/curtain-right.png" alt="curtain-right.png">
+                    </div>
+                </div><!-- .curtain_wrap end -->
+                <div class="deco">
+                    <img src="img/brplay-top.png" alt="brplay-top" class="deco-top">
+                    <img src="img/brplay-left.png" alt="brplay-left" class="deco-left">
+                    <img src="img/brplay-right.png" alt="brplay-right" class="deco-right">
+                </div><!-- .deco end -->
+                <button class="curtain_btn">BR Play</button>
+                <div class="rotating-slider">
+                    <ul class="slides">
+                        <li>
+                            <div class="inner">
+                                <div class="title">
+                                    <h2>배스킨라빈스 광장</h2>
+                                    <p>배라에게 의견을, 배라와 소통을</p>
+                                </div><!-- .title end -->
+                                <div class="list">
+                                    <div class="item">
+                                        <strong>내가 만드는 아이스크림</strong>
+                                        <span>내가 만드는 맛이<br />
+                                            31가지 아이스크림이 된다고?</span>
+                                        <a href="#">만들어주세요</a>
+                                    </div><!-- .item end -->
+                                    <div class="item">
+                                        <strong>중소기업 콜라보레이션</strong>
+                                        <span>우리 브랜드를<br />
+                                            “널리널리” 알리고 싶은 기업 모여라</span>
+                                        <a href="#">우리와 함께해요</a>
+                                    </div><!-- .item end -->
+                                    <div class="item">
+                                        <strong>점포개설 문의</strong>
+                                        <span>배라와의 시작, 배라로의 시작</span>
+                                        <div class="link">
+                                            <a href="#">동행을 희망해요</a>
+                                            <a href="#">더 알아보기</a>
+                                        </div><!-- .link end -->
+                                    </div><!-- .item end -->
+                                </div><!-- .list end -->
+
+                            </div><!-- .inner end -->
+                        </li>
+                        <li>
+                            <div class="inner">
+                                <div class="title">
+                                    <h2>BR 레시피</h2>
+                                    <p>다양한 전문가들이 제안하는 배라 행복레시피</p>
+                                </div><!-- .title end -->
+                                <ul class="img_list">
+                                    <li><a href="#" class="img_item">
+                                            <div class="img_wrap">
+                                                <img src="img/recipe1.jpg" alt="recipe1">
+                                            </div><!-- .img_wrap end -->
+                                            <p>AI 아티스트가 그린 아이스크림 나라</p>
+                                            <button class="more"><img src="img/arrow-right-p.svg" alt="more"></button>
+                                        </a></li><!-- .img_item end -->
+                                    <li><a href="#" class="img_item">
+                                            <div class="img_wrap">
+                                                <img src="img/recipe2.jpg" alt="recipe2">
+                                            </div><!-- .img_wrap end -->
+                                            <p>메타버스 아이스크림</p>
+                                            <button class="more"><img src="img/arrow-right-p.svg" alt="more"></button>
+                                        </a></li><!-- .img_item end -->
+                                    <li><a href="#" class="img_item">
+                                            <div class="img_wrap">
+                                                <img src="img/recipe3.jpg" alt="recipe3">
+                                            </div><!-- .img_wrap end -->
+                                            <p>아이스크림과 함께 춤을</p>
+                                            <button class="more"><img src="img/arrow-right-p.svg" alt="more"></button>
+                                        </a></li><!-- .img_item end -->
+                                    <li><a href="#" class="img_item">
+                                            <div class="img_wrap">
+                                                <img src="img/recipe4.jpg" alt="recipe4">
+                                            </div><!-- .img_wrap end -->
+                                            <p>꽃으로 표현한 아이스크림</p>
+                                            <button class="more"><img src="img/arrow-right-p.svg" alt="more"></button>
+                                        </a></li><!-- .img_item end -->
+                                    <li><a href="#" class="img_item">
+                                            <div class="img_wrap">
+                                                <img src="img/recipe5.jpg" alt="recipe5">
+                                            </div><!-- .img_wrap end -->
+                                            <p>봄의 정원</p>
+                                            <button class="more"><img src="img/arrow-right-p.svg" alt="more"></button>
+                                        </a></li><!-- .img_item end -->
+                                    <li><a href="#" class="img_item">
+                                            <div class="img_wrap">
+                                                <img src="img/recipe6.jpg" alt="recipe6">
+                                            </div><!-- .img_wrap end -->
+                                            <p>아이스크림 속 작은 악마들</p>
+                                            <button class="more"><img src="img/arrow-right-p.svg" alt="more"></button>
+                                        </a></li><!-- .img_item end -->
+                                </ul><!-- .img_list end -->
+                            </div><!-- .inner end -->
+                        </li>
+                        <li>
+                            <div class="inner">
+                                <div class="title">
+                                    <h2>마이플레이버리스트</h2>
+                                    <p>내 맘대로 하는 맛조합! 나만의 플레이버 리스트를 만들어보세요!<br />
+                                        센스있는 플레이버 리스트에게는 행운이 올지도 모른답니다!</p>
+                                </div><!-- .title end -->
+                                <div class="flavor_list">
+                                    <div class="item">
+                                        <strong>MY<br />
+                                            FLAVORLIST</strong>
+                                        <p>초코를 좋아하는 사람을<br />
+                                            위해 절대 실패 없는 조합</p>
+                                        <span>- 초코러버 -</span>
+                                        <a href="#"><img class="hover_btn" src="img/arrow-right-b.svg" alt="more"></a>
+                                        <div class="img_wrap">
+                                            <img src="img/icecream1.png" alt="icecream1">
+                                            <img src="img/icecream2.png" alt="icecream2">
+                                            <img src="img/icecream3.png" alt="icecream3">
+                                        </div><!-- .img_wrap end -->
+                                    </div><!-- .item end -->
+                                    <div class="item">
+                                        <strong>WHAT’S<br />
+                                            MY TYPE?</strong>
+                                        <p>나의 배스킨라빈스 최애 맛으로<br />
+                                            알아보는 성격 테스트</p>
+                                        <span>나는 어떤 유형일까?</span>
+                                        <a href="#"><img class="hover_btn" src="img/arrow-right-m.svg" alt="more"></a>
+                                        <div class="text_wrap">
+                                            <ul class="flow">
+                                                <li>터프한 😎</li>
+                                                <li>정직한 😀</li>
+                                                <li>의존적 💙</li>
+                                                <li>지성적 📖</li>
+                                            </ul><!-- .flow end -->
+                                            <ul class="flow">
+                                                <li>효율적 🗳</li>
+                                                <li>관대한 😇</li>
+                                                <li>명랑한 😊</li>
+                                            </ul><!-- .flow end -->
+                                        </div><!-- .text_wrap end -->
+                                    </div><!-- .item end -->
+                                </div><!-- .flavor_list end -->
+                            </div><!-- .inner end -->
+                        </li>
+                    </ul><!-- .slides end -->
+                </div><!-- .rotating-slider end -->
+            </div><!-- .inner end -->
+
+        </section><!-- .brplay end -->
+
+        <div class="banner_b">
+            <ul>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+                <li class="square"><img src="img/square-p.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-p.svg" alt="banner_logo"></li>
+                <li class="text">한달내내 새로운 맛</li>
+            </ul>
+        </div><!-- .banner_b2 end -->
+
+        <section class="section pin-section">
+            <div class="content">
+                <div class="title_wrap">
+                    <div class="title">
+                        <h2>Be Better</h2>
+                        <p>배라가 사회와 함께하는 방법,<br />
+                            가치 있는 같이</p>
+                    </div><!-- .title end -->
+                    <ul class="better-list">
+                        <li>Pink Farm</li>
+                        <li>Pink Dream</li>
+                        <li>Pink Link</li>
+                    </ul><!-- .list -->
+                </div><!-- .title_wrap -->
+                <div class="fill"></div>
+                <div class="right">
+                    <div class="slide center">
+                        <div class="img">
+                            <img src="img/pinkfarm.png" alt="pinkfarm">
+                        </div><!-- .img end -->
+                        <div class="text_wrap">
+                            <h3>핑크팜 캠페인이란?</h3>
+                            <span>지역 농가 상생 프로젝트</span>
+                            <p>핑크팜 캠페인은 배스킨라빈스와 지역농가 청년농부지원을 위한<br />
+                                콜라보레이션 상생 프로젝트입니다.</p>
+                            <ul class="spoon">
+                                <li>지역농가, 청년농부지원 콜라보레이션 제품 출시</li>
+                            </ul>
+                            <a href="#">더보기</a>
+                        </div><!-- .text_wrap end -->
+                    </div>
+                    <div class="slide center">
+                        <div class="img">
+                            <img src="img/pinkdream.png" alt="pinkdream">
+                        </div><!-- .img end -->
+                        <div class="text_wrap">
+                            <h3>핑크드림 캠페인이란?</h3>
+                            <span>배라와 소비자가 함께 만드는 따뜻한 31데이!</span>
+                            <p>핑크드림 캠페인은 브랜드와 소비자가 함께 도움이 필요한 이웃을<br />
+                                지원하는 사회공헌 활동입니다.</p>
+                            <ul class="spoon">
+                                <li>31명의 자립준비청년 선발해 생애최초 종합건강검진 및 장학금 지원</li>
+                                <li>자립준비청년 대상 주거 환경 개선비 및 역량강화 교육비 지급</li>
+                                <li>핑크스푼 업사이클링 및 어린이 놀이 정원 환경 조성 사업 진행</li>
+                            </ul>
+                            <a href="#">더보기</a>
+                        </div><!-- .text_wrap end -->
+                    </div>
+                    <div class="slide center">
+                        <div class="img">
+                            <img src="img/pinklink.png" alt="pinklink">
+                        </div><!-- .img end -->
+                        <div class="text_wrap">
+                            <h3>핑크링크 캠페인이란?</h3>
+                            <span>중소 기업 콜라보 프로젝트</span>
+                            <p>핑크링크 캠페인은 배스킨라빈스에서 중소기업 지원을 위해 진행하는<br />
+                                콜라보레이션 상생 프로젝트입니다.</p>
+                            <ul class="spoon">
+                                <li>중소기업 콜라보레이션 제품 출시</li>
+                            </ul>
+                            <a href="#">더보기</a>
+                        </div><!-- .text_wrap end -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="banner_w">
+            <ul>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+                <li class="square"><img src="img/square-w.png" alt="square"></li>
+                <li class="bannerlogo"><img src="img/banner_logo-w.svg" alt="banner_logo"></li>
+                <li class="text">Seize the Yay</li>
+            </ul>
+        </div><!-- .banner_w end -->
+
+        <section class="benefit">
+            <div class="inner">
+                <img src="img/benefit1.png" alt="sprinkle" class="top">
+                <div class="list">
+                    <div class="list_inner">
+                        <h2>제휴 혜택</h2>
+                        <ul class="item_wrap">
+                            <li><a href="#" class="item">
+                                    <span>D-4</span>
+                                    <p>해피아워,<br />
+                                        2-5시 싱글레귤러 1+1</p>
+                                    <img src="img/benefit-img1.png" alt="benefit-img1.png">
+                                </a></li>
+                            <li><a href="#" class="item">
+                                    <p>KT 멤버십 배스킨라빈스<br />
+                                        특별한 제휴 혜택!</p>
+                                    <img src="img/benefit-img2.png" alt="benefit-img2">
+                                </a></li>
+                            <li><a href="#" class="item">
+                                    <p>T멤버십 회원 대상<br />
+                                        싱글레귤러 ~50% 할인 or 적립</p>
+                                    <img src="img/benefit-img3.png" alt="benefit-img3">
+                                </a></li>
+                        </ul><!-- .item_wrap end -->
+                        <a class="more" href="#">더보기</a>
+                    </div><!-- .list_inner end -->
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .benefit end -->
+
+        <section class="etc">
+            <div class="inner">
+                <img src="img/section-etc.png" alt="sectionimg">
+                <div class="list">
+                    <div class="item">
+                        <h2>매장찾기</h2>
+                        <div class="img">
+                            <img src="img/storeimg.jpg" alt="storeimg">
+                            <div class="searchbar">
+                                <input type="text" name="" id="" placeholder="내 근처 매장 찾기">
+                                <button>
+                                    <img class="before" src="img/icon-search-g.svg" alt="search">
+                                    <img class="after" src="img/icon-search.svg" alt="search">
+                                </button>
+                            </div><!-- .searchbar end -->
+                        </div><!-- .img end -->
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <h2>배라 APP</h2>
+                        <div class="down">
+                            <div class="text_wrap">
+                                <h3>배스킨라빈스 공식<br />
+                                    모바일 어플리케이션</h3>
+                                <a href="#">다운로드하기</a>
+                            </div><!-- .text_wrap end -->
+                            <div class="img">
+                                <img src="img/app_mockup_01.png" alt="app_mockup">
+                            </div><!-- .img end -->
+                        </div><!-- .down end -->
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .etc end -->
+
+    </main><!-- .main end -->
+
+    <footer class="footer">
+        <ul class="footer_top">
+            <li><a href="#">사이트맵</a></li>
+            <li><a href="#">제품문의</a></li>
+            <li><a href="#">윤리신고센터</a></li>
+            <li><a href="#">해피포인트카드 이용약관</a></li>
+            <li><a href="#">배스킨라빈스 리워드 이용약관</a></li>
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">영상정보처리기기운영관리방침</a></li>
+            <li><a href="#">안전보건 경영방침</a></li>
+            <li><a href="#">공정거래자율준수</a></li>
+            <li><a href="#">거래희망회사 사전등록</a></li>
+        </ul><!-- .footer_top end -->
+        <div class="footer_logo">
+            <img src="img/footer-logo.svg" alt="footer-logo">
+            <ul class="footer_info">
+                <li>사업자 등록번호 : 303-81-09535</li>
+                <li>비알코리아(주) 대표이사 도세호</li>
+                <li>서울특별시 서초구 남부순환로 2620(양재동 11-149번지)</li>
+                <li>TEL : 080-555-3131</li>
+                <li>새인정보관리책임자 : 이경은/실장</li>
+            </ul><!-- .footer_info end -->
+        </div><!-- .footer_logo end -->
+        <div class="footer_low">
+            <ul class="brand_logo">
+                <li><a href="#"><img src="img/footer_logo01.svg" alt="footer_logo01"></a></li>
+                <li><a href="#"><img src="img/footer_logo02.svg" alt="footer_logo02"></a></li>
+                <li><a href="#"><img src="img/footer_logo03.svg" alt="footer_logo03"></a></li>
+                <li><a href="#"><img src="img/footer_logo04.svg" alt="footer_logo04"></a></li>
+                <li><a href="#"><img src="img/footer_logo05.svg" alt="footer_logo05"></a></li>
+            </ul><!-- .brand_logo end -->
+            <p>Copyright ⓒ 2023 BRKOREA Company. All Rights Reserved.</p>
+            <div class="icon_wrap">
+                <ul class="icon">
+                    <li><a href="#"><img src="img/btn_app.svg" alt="app_download"></a></li>
+                    <li><a href="#"><img src="img/btn_instagram.svg" alt="btn_instagram"></a></li>
+                    <li><a href="#"><img src="img/btn_youtube.svg" alt="btn_youtube"></a></li>
+                    <li><a href="#"><img src="img/btn_facebook.svg" alt="btn_facebook"></a></li>
+                    <li><a href="#"><img src="img/btn_magazine.svg" alt="btn_magazine"></a></li>
+                </ul><!-- .icon end -->
+                <div class="select_box">
+                    <button class="select_btn">
+                        <span>FAMILY SITE</span>
+                        <img src="img/arrow-down-p.svg" alt="down">
+                    </button>
+                    <ul class="select">
+                        <li><a href="#">SPC그룹사이트</a></li>
+                        <li><a href="#">SPC MAGAZINE</a></li>
+                        <li><a href="#">해피포인트카드</a></li>
+                        <li><a href="#">파스쿠찌</a></li>
+                        <li><a href="#">삼립</a></li>
+                        <li><a href="#">파리바게뜨</a></li>
+                        <li><a href="#">던킨</a></li>
+                    </ul><!-- .select end -->
+                </div><!-- .select_box end -->
+            </div><!-- .icon_wrap end -->
+        </div><!-- .footer_low end -->
+    </footer><!-- .footer end -->
+    <div class="top_btn">
+        <a href="#" class="up_btn"><img src="img/icon-up-p.svg" alt="up"></a>
+        <a href="#" class="btn">창업문의</a>
+    </div><!-- .top_btn end -->
+</body>
+
+</html>
