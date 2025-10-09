@@ -260,7 +260,7 @@
             listItems.forEach((item, i) => {
                 const previousItem = listItems[i - 1];
                 if (previousItem) {
-                    tl2.set(item, { color: "#FF5484", fontSize: "70px" }, 0.5 * i)
+                    tl2.set(item, { color: "#FF5484", fontSize: "60px" }, 0.5 * i)
                         .to(
                             slides[i],
                             {
@@ -279,7 +279,7 @@
                             "<"
                         );
                 } else {
-                    gsap.set(item, { color: "#FF5484", fontSize: "70px" });
+                    gsap.set(item, { color: "#FF5484", fontSize: "60px" });
                     gsap.set(slides[i], { autoAlpha: 1 });
                 }
             });
@@ -344,9 +344,14 @@
                     <li><a href="#">BR Story</a></li>
                     <li><a href="#">BR News</a></li>
                 </ul><!-- .gnb end -->
-                <button class="search">
-                    <img src="img/icon-search.svg" alt="search">
-                </button><!-- .search end -->
+                <div class="sub_nav">
+                    <button class="search">
+                        <img src="img/icon-search.svg" alt="search">
+                    </button><!-- .search end -->
+                    <button class="menu">
+                        <img src="img/icon-menu.svg" alt="menu">
+                    </button><!-- .menu end -->
+                </div><!-- .sub_nav end -->
             </nav><!-- .nav end -->
         </div><!-- .inner end -->
     </header><!-- .header end -->
@@ -890,7 +895,6 @@
                         <li>Pink Link</li>
                     </ul><!-- .list -->
                 </div><!-- .title_wrap -->
-                <div class="fill"></div>
                 <div class="right">
                     <div class="slide center">
                         <div class="img">
@@ -939,8 +943,9 @@
                             <a href="#">더보기</a>
                         </div><!-- .text_wrap end -->
                     </div>
-                </div>
-            </div>
+                </div><!-- .right end -->
+                <div class="blank"></div>
+            </div><!-- .content end -->
         </section>
 
         <div class="banner_w">
