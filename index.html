@@ -195,7 +195,7 @@
             let decoRight = document.querySelector('.deco-right');
             let benefitSprinkle = document.querySelector('.benefit .top');
             let benefitList = document.querySelector('.benefit .list');
-            let topBtn = document.querySelector('.top_btn');
+            let topBtn = $('.top_btn');
 
 
 
@@ -237,6 +237,11 @@
             });
 
 
+            topBtn.on('click', function(){
+                $('html, body').animate({
+                    scrollTop : 0
+                }, 800);
+            });
 
             console.clear();
 
@@ -341,7 +346,7 @@
             });
 
 
-        };
+        }; //script end
 
     </script>
 </head>
@@ -1185,7 +1190,7 @@
         </div><!-- .footer_low end -->
     </footer><!-- .footer end -->
     <div class="top_btn">
-        <a href="#" class="up_btn"><img src="img/icon-up-p.svg" alt="up"></a>
+        <button class="up_btn"><img src="img/icon-up-p.svg" alt="up"></button>
         <a href="#" class="btn">창업문의</a>
     </div><!-- .top_btn end -->
 </body>
