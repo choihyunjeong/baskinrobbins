@@ -105,11 +105,19 @@ body {
 }
 
 @media screen and (max-width:930px) {
+    .header .inner {
+        padding: 0 20px;
+    }
     .header .inner .nav .gnb {
         display: none;
     }
     .header .inner .nav .sub_nav .menu {
         display: block;
+    }
+}
+@media screen and (max-width:375px) {
+    .header .inner .logo {
+        width: 80px;
     }
 }
 
@@ -1015,6 +1023,8 @@ body {
 
 
 
+
+
 /* .pin-section */
 
 .pin-section {
@@ -1158,7 +1168,7 @@ body {
     font-weight: 600;
 }
 
-@media screen and (max-width:1800px) {
+@media screen and (max-width:1400px) {
     
 }
 
