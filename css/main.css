@@ -56,18 +56,25 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 300ms ease-out;
+    transition: background-color 500ms ease-out;
+}
+.header.active {
+    top: -100px;
 }
 .header .inner:hover {
     background-color: #F986BD;
-    transition: background-color 300ms ease-in;
+    transition: background-color 500ms ease-in;
+    border-radius: 100px;
+    width: 90%;
+    height: 90px;
+    margin: 20px auto;
+    border: 6px solid #fff;
 }
 .header .inner:hover .nav .gnb {
     gap: 0;
 }
 .header .inner:hover .nav .gnb > li .depth-01 {
-    font-weight: 600;
-    width: 200px;
+    width: 180px;
     text-align: center;
     transition: all 300ms ease-in;
 }
@@ -100,23 +107,30 @@ button {
     position: relative;
 }
 .header .inner .nav .gnb > li .depth-01 {
-    font-size: 20px;
+    font-size: 18px;
     color: #fff;
     line-height: 100px;
     display: block;
     transition: all 300ms ease-out;
 }
+.header .inner .nav .gnb > li .depth-01:hover {
+    font-weight: 600;
+    font-size: 20px;
+}
 .header .inner .nav .gnb > li .depth-02 {
     position: absolute;
-    top: 100px;
+    top: 75px;
     left: 0;
     white-space: nowrap;
     color: #333;
-    background-color: #fff;
+    background-color: #FFE4EA;
     width: 100%;
     padding: 10px 0;
     display: none;
     font-weight: 500;
+    border-radius: 20px;
+    z-index: 5;
+    /* border: 3px solid #F986BD; */
 }
 .header .inner .nav .gnb > li .depth-02 li {
     padding: 10px;

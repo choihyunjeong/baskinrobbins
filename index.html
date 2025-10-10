@@ -37,6 +37,22 @@
 
     <script>
         window.onload = () => {
+            let header = document.querySelector('.header');
+            let prevScrollBar = 0;
+
+            window.addEventListener('scroll', () => {
+                let scrollBar = window.scrollY
+                
+                if (scrollBar > prevScrollBar) {
+                    header.classList.add('active');
+                } else {
+                    header.classList.remove('active');
+                }
+
+                prevScrollBar = scrollBar
+            });
+
+
             gsap.registerPlugin(
                 //SplitText,
                 DrawSVGPlugin,
