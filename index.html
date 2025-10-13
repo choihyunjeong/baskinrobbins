@@ -42,7 +42,7 @@
 
             window.addEventListener('scroll', () => {
                 let scrollBar = window.scrollY
-                
+
                 if (scrollBar > prevScrollBar) {
                     header.classList.add('active');
                 } else {
@@ -187,6 +187,17 @@
                 },
             });
 
+            var swiper = new Swiper(".menuSwiper", {
+                effect: "fade",
+                slidesPerView: 1,
+                spaceBetween: 0,
+                centeredSlides: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+
             let curtainBtn = document.querySelector('.curtain_btn');
             let curtainLeft = document.querySelector('.curtain.left');
             let curtainRight = document.querySelector('.curtain.right');
@@ -218,7 +229,7 @@
                     benefitSprinkle.classList.add('act');
                     benefitList.classList.add('act');
                 }
-                if(scrollBar < 6200) {
+                if (scrollBar < 6200) {
                     topBtn.classList.remove('act');
                 }
                 if (scrollBar > 6300) {
@@ -238,9 +249,9 @@
             });
 
 
-            up.on('click', function(){
+            up.on('click', function () {
                 $('html, body').animate({
-                    scrollTop : 0
+                    scrollTop: 0
                 }, 800);
             });
 
@@ -283,7 +294,7 @@
             listItems.forEach((item, i) => {
                 const previousItem = listItems[i - 1];
                 if (previousItem) {
-                    tl2.set(item, { color: "#FF5484", fontSize: "60px" }, 0.5 * i)
+                    tl2.set(item, { color: "#FF5484", fontSize: "6rem" }, 0.5 * i)
                         .to(
                             slides[i],
                             {
@@ -292,7 +303,7 @@
                             },
                             "<"
                         )
-                        .set(previousItem, { color: "#ccc", fontSize: "30px" }, "<")
+                        .set(previousItem, { color: "#ccc", fontSize: "3rem" }, "<")
                         .to(
                             slides[i - 1],
                             {
@@ -302,7 +313,7 @@
                             "<"
                         );
                 } else {
-                    gsap.set(item, { color: "#FF5484", fontSize: "60px" });
+                    gsap.set(item, { color: "#FF5484", fontSize: "6rem" });
                     gsap.set(slides[i], { autoAlpha: 1 });
                 }
             });
@@ -341,7 +352,7 @@
 
             let selectBtn = document.querySelector('.select_btn');
             let selectList = document.querySelector('.select');
-            
+
             selectBtn.addEventListener('click', () => {
                 selectList.classList.toggle('act');
             });
@@ -730,6 +741,18 @@
 
         </section><!-- .new_menu end -->
 
+        <section class="menu">
+            <div class="swiper menuSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        
+                    </div><!-- .swiper-slide end -->
+                </div><!-- .swiper-wrapper end -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div><!-- .swiper end -->
+        </section><!-- .menu end -->
+
         <div class="banner_b">
             <ul>
                 <li class="square"><img src="img/square-p.png" alt="square"></li>
@@ -989,8 +1012,7 @@
                         <div class="text_wrap">
                             <h3>핑크팜 캠페인이란?</h3>
                             <span>지역 농가 상생 프로젝트</span>
-                            <p>핑크팜 캠페인은 배스킨라빈스와 지역농가 청년농부지원을 위한<br />
-                                콜라보레이션 상생 프로젝트입니다.</p>
+                            <p>핑크팜 캠페인은 배스킨라빈스와 지역농가 청년농부지원을 위한 콜라보레이션 상생 프로젝트입니다.</p>
                             <ul class="spoon">
                                 <li>지역농가, 청년농부지원 콜라보레이션 제품 출시</li>
                             </ul>
@@ -1004,8 +1026,7 @@
                         <div class="text_wrap">
                             <h3>핑크드림 캠페인이란?</h3>
                             <span>배라와 소비자가 함께 만드는 따뜻한 31데이!</span>
-                            <p>핑크드림 캠페인은 브랜드와 소비자가 함께 도움이 필요한 이웃을<br />
-                                지원하는 사회공헌 활동입니다.</p>
+                            <p>핑크드림 캠페인은 브랜드와 소비자가 함께 도움이 필요한 이웃을 지원하는 사회공헌 활동입니다.</p>
                             <ul class="spoon">
                                 <li>31명의 자립준비청년 선발해 생애최초 종합건강검진 및 장학금 지원</li>
                                 <li>자립준비청년 대상 주거 환경 개선비 및 역량강화 교육비 지급</li>
@@ -1021,8 +1042,7 @@
                         <div class="text_wrap">
                             <h3>핑크링크 캠페인이란?</h3>
                             <span>중소 기업 콜라보 프로젝트</span>
-                            <p>핑크링크 캠페인은 배스킨라빈스에서 중소기업 지원을 위해 진행하는<br />
-                                콜라보레이션 상생 프로젝트입니다.</p>
+                            <p>핑크링크 캠페인은 배스킨라빈스에서 중소기업 지원을 위해 진행하는 콜라보레이션 상생 프로젝트입니다.</p>
                             <ul class="spoon">
                                 <li>중소기업 콜라보레이션 제품 출시</li>
                             </ul>
