@@ -196,6 +196,7 @@
             let benefitSprinkle = document.querySelector('.benefit .top');
             let benefitList = document.querySelector('.benefit .list');
             let topBtn = document.querySelector('.top_btn');
+            let up = $('.top_btn');
 
 
 
@@ -237,7 +238,7 @@
             });
 
 
-            topBtn.on('click', function(){
+            up.on('click', function(){
                 $('html, body').animate({
                     scrollTop : 0
                 }, 800);
