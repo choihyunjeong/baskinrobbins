@@ -43,6 +43,9 @@ button {
     z-index: 1000;
 }
 
+main {
+    overflow-x: hidden;
+}
 
 
 /* header */
@@ -301,6 +304,18 @@ button {
     }
 }
 
+@media screen and (max-width: 700px) {
+    .main_visual #explode {
+        width: 200vw;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .main_visual #explode {
+        transform: translateY(150px);
+    }
+}
+
 
 /* new_menu */
 
@@ -422,7 +437,7 @@ button {
     width: 45%;
     object-fit: cover;
     position: absolute;
-    top: 49%;
+    top: 46%;
     left: 50%;
     transform: translateX(-50%);
     z-index: -1;
@@ -491,6 +506,14 @@ button {
     .new_menu .swiper-slide .text_wrap {
         bottom: -20%;
     }
+
+    .new_menu .swiper-slide .next .cone {
+        top: 44%;
+    }
+
+    .new_menu .swiper-slide .prev .cone {
+        top: 44%;
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -501,9 +524,42 @@ button {
     .new_menu .swiper-slide .text_wrap {
         bottom: -25%;
     }
+
+    .new_menu .swiper-slide .next .cone {
+        top: 40%;
+    }
+
+    .new_menu .swiper-slide .prev .cone {
+        top: 40%;
+    }
+
+    .new_menu .swiper-slide .prev {
+        left: 50px;
+    }
+
+    .new_menu .swiper-slide .next {
+        right: 50px;
+    }
+
+    .new_menu .swiper-button-next,
+    .new_menu .swiper-button-prev {
+        height: 25%;
+        top: 46%;
+        color: transparent;
+    }
+
+    .new_menu .swiper-button-next,
+    .new_menu .swiper-rtl .swiper-button-prev {
+        right: 70px;
+    }
+
+    .new_menu .swiper-button-prev,
+    .new_menu .swiper-rtl .swiper-button-next {
+        left: 70px;
+    }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1024px) {
     .new_menu .swiper-slide .current {
         top: 150px;
     }
@@ -511,9 +567,7 @@ button {
     .new_menu .swiper-slide .text_wrap {
         bottom: -40%;
     }
-}
 
-@media screen and (max-width: 834px) {
     .new_menu .swiper-slide .prev {
         display: none;
     }
@@ -531,17 +585,52 @@ button {
     }
 
     .new_menu .swiper-slide .current {
-        width: 71.94%;
+        width: 50%;
         top: 0px;
     }
 
     .new_menu .swiper-slide .current .cone {
         width: 36.66%;
-        bottom: -19.66%;
+        top: 54%;
     }
 
     .new_menu .swiper-slide .text_wrap {
         bottom: -47%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .new_menu .swiper-slide .text_wrap {
+        bottom: -60%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .new_menu .swiper-slide .current .cone {
+        top: 51%;
+    }
+    .new_menu .swiper-slide .current {
+        top: 100px;
+    }
+    .new_menu .swiper-slide .text_wrap {
+        bottom: -80%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .new_menu .swiper-slide .current .cone {
+        top: 48%;
+    }
+    .new_menu .swiper-slide .current {
+        top: 150px;
+    }
+    .new_menu .swiper-slide .text_wrap {
+        bottom: -70%;
+    }
+    .new_menu .swiper-slide .text_wrap h3 {
+        font-size: 20px;
+    }
+    .new_menu .swiper-slide .text_wrap p {
+        font-size: 16px;
     }
 }
 
@@ -1157,12 +1246,15 @@ button {
     .brplay .deco .deco-left.act {
         left: -50px;
     }
+
     .brplay .deco .deco-right.act {
         right: -50px;
     }
+
     .brplay .rotating-slider .slides li .title h2 {
         font-size: 50px;
     }
+
     .brplay .rotating-slider {
         width: 100% !important;
     }
@@ -1170,12 +1262,15 @@ button {
     .brplay .rotating-slider ul.slides>li {
         width: 48% !important;
     }
+
     .brplay .rotating-slider .slides li .list .item strong {
         font-size: 28px;
     }
+
     .brplay .rotating-slider .slides li .list .item span {
         font-size: 18px;
     }
+
     .brplay .rotating-slider ul.direction-controls li.left-arrow {
         right: 95%;
     }
@@ -1183,103 +1278,132 @@ button {
     .brplay .rotating-slider ul.direction-controls li.right-arrow {
         left: 95%;
     }
+
     .brplay .rotating-slider .slides li .img_list {
         width: 70%;
     }
+
     .brplay .rotating-slider .slides li .img_list li {
         width: 23%;
     }
 }
+
 @media screen and (max-width: 1400px) {
     .brplay .deco .deco-left.act {
         left: -100px;
     }
+
     .brplay .deco .deco-right.act {
         right: -100px;
     }
+
     .brplay .rotating-slider .slides li .list .item {
         width: 21%;
         height: 250px;
     }
+
     .brplay .rotating-slider .slides li .list .item span {
         margin: 8px 0 40px;
     }
+
     .brplay .rotating-slider .slides li .list .item a {
         padding: 10px 30px;
     }
+
     .brplay .rotating-slider .slides li .list .item .link {
         gap: 10px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list {
         gap: 10%;
     }
+
     .brplay .inner .curtain_btn {
         font-size: 80px;
     }
 }
+
 @media screen and (max-width: 1200px) {
     .brplay .rotating-slider .slides li .title {
         margin: 100px 0 30px;
     }
+
     .brplay .rotating-slider .slides li .list {
         flex-direction: column;
         align-items: center;
     }
+
     .brplay .rotating-slider .slides li .list .item {
         width: 28%;
         height: 200px;
     }
+
     .brplay .rotating-slider .slides li .list .item span {
         margin: 8px 0 20px;
     }
+
     .brplay .rotating-slider .slides li .img_list {
         width: 60%;
         column-gap: 70px;
     }
+
     .brplay .rotating-slider .slides li .img_list li {
         width: 20%;
     }
+
     .brplay .rotating-slider .slides li .img_list .img_item .img_wrap img {
         height: 200px;
     }
+
     .brplay .rotating-slider .slides li:nth-child(3) .title {
         margin: 100px 0 50px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list {
         gap: 6%;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item {
         width: 20%;
         height: 450px;
     }
 }
+
 @media screen and (max-width: 900px) {
     .brplay .deco .deco-left.act {
         left: -150px;
     }
+
     .brplay .deco .deco-right.act {
         right: -150px;
     }
+
     .brplay .inner .curtain_btn {
         font-size: 70px;
     }
+
     .brplay .rotating-slider .slides li .img_list {
         width: 50%;
         column-gap: 100px;
         row-gap: 50px;
     }
+
     .brplay .rotating-slider .slides li .img_list li {
         width: 25%;
     }
+
     .brplay .rotating-slider .slides li .img_list .img_item .img_wrap img {
         height: 180px;
     }
+
     .brplay .rotating-slider .slides li:nth-child(2) .title {
         margin: 100px 0 30px;
     }
+
     .brplay .rotating-slider .slides li:nth-child(2) .title h2 {
         margin-bottom: 10px;
     }
+
     .brplay .rotating-slider ul.direction-controls li.left-arrow {
         right: 90%;
     }
@@ -1287,160 +1411,203 @@ button {
     .brplay .rotating-slider ul.direction-controls li.right-arrow {
         left: 90%;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item {
         width: 17%;
         height: 400px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item strong {
         font-size: 30px;
         margin-top: 30px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item:nth-child(2) strong {
         font-size: 30px;
         margin-top: 30px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item p {
         font-size: 18px;
         margin: 30px 0 8px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list {
         gap: 3%;
     }
 }
+
 @media screen and (max-width: 700px) {
     .brplay .inner .curtain_btn {
         font-size: 60px;
     }
+
     .brplay .deco .deco-top.act {
         top: -1000px;
     }
+
     .brplay .deco .deco-left.act {
         left: -1000px;
     }
+
     .brplay .deco .deco-right.act {
         right: -1000px;
     }
+
     .brplay .rotating-slider .slides li:nth-child(3) .title {
         margin: 40px 0 20px;
     }
+
     .brplay .rotating-slider .slides li .img_list .img_item .more {
         width: 36px;
         height: 36px;
         right: -18px;
         bottom: -18px;
     }
+
     .brplay .rotating-slider .slides li .img_list .img_item p {
         font-size: 16px;
         bottom: 12px;
         left: 12px;
     }
+
     .brplay .rotating-slider .slides li .img_list {
         width: 40%;
         row-gap: 40px;
         column-gap: 50px;
     }
+
     .brplay .rotating-slider .slides li .img_list li {
         width: 28%;
     }
+
     .brplay .rotating-slider .slides li .img_list .img_item .img_wrap img {
         height: 170px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list {
         flex-direction: column;
         align-items: center;
         row-gap: 20px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item {
         width: 17%;
         height: 350px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item .img_wrap {
         height: 150px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item .text_wrap {
         height: 150px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item p {
         font-size: 16px;
         margin: 20px 0 8px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item strong {
         font-size: 24px;
         margin-top: 20px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item:nth-child(2) strong {
         font-size: 24px;
         margin-top: 20px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item .img_wrap img {
         width: 120px;
         height: 120px;
     }
 }
+
 @media screen and (max-width: 500px) {
     .brplay .inner .curtain_btn {
         font-size: 50px;
     }
+
     .brplay .rotating-slider .slides li .title {
         margin: 50px 0 20px;
     }
+
     .brplay .rotating-slider .slides li:nth-child(2) .title {
         margin: 50px 0 20px;
     }
+
     .brplay .rotating-slider .slides li .title h2 {
         font-size: 20px;
         margin-bottom: 8px;
     }
+
     .brplay .rotating-slider .slides li .title p {
         font-size: 16px;
     }
+
     .brplay .rotating-slider .slides li .list .item {
         width: 20%;
     }
+
     .brplay .rotating-slider .slides li .list .item strong {
         font-size: 20px;
     }
+
     .brplay .rotating-slider .slides li .list .item span {
         font-size: 16px;
     }
+
     .brplay .rotating-slider .slides li .list .item a {
         padding: 8px 20px;
     }
+
     .brplay .rotating-slider .slides li .img_list {
         width: 15%;
         margin-top: 16px;
     }
+
     .brplay .rotating-slider .slides li .img_list li {
         width: 90%;
     }
+
     .brplay .rotating-slider .slides li .img_list .img_item .img_wrap img {
         height: 200px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list {
         row-gap: 30px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item {
         width: 15%;
         height: 320px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item .img_wrap {
         height: 120px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item .text_wrap {
         height: 120px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item p {
         font-size: 16px;
         margin: 20px 0 8px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item strong {
         font-size: 20px;
         margin-top: 20px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item:nth-child(2) strong {
         font-size: 20px;
         margin-top: 20px;
     }
+
     .brplay .rotating-slider .slides li .flavor_list .item .text_wrap {
         padding-bottom: 10px;
     }
@@ -1547,9 +1714,11 @@ button {
     width: 100%;
     object-fit: cover;
 }
+
 .pin-section .slide .text_wrap {
     width: 45.81%;
 }
+
 .pin-section .slide .text_wrap h3 {
     font-size: 50px;
     font-weight: 600;
@@ -1666,16 +1835,19 @@ button {
     .pin-section .slide .img {
         width: 51.91%;
     }
+
     .pin-section .slide .text_wrap {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 84.52%;
     }
+
     .pin-section .slide .text_wrap h3 {
         font-size: 40px;
     }
-    .pin-section .slide .text_wrap span  {
+
+    .pin-section .slide .text_wrap span {
         font-size: 20px;
     }
 }
@@ -1700,31 +1872,38 @@ button {
         border-radius: 20px;
         font-size: 16px;
     }
-    
+
 }
+
 @media screen and (max-width:900px) {
     .pin-section .slide .spoon {
         font-size: 14px;
     }
 }
+
 @media screen and (max-width:750px) {
     .pin-section .slide .text_wrap h3 {
         font-size: 30px;
     }
-    .pin-section .slide .text_wrap span  {
+
+    .pin-section .slide .text_wrap span {
         font-size: 16px;
     }
+
     .pin-section .slide .text_wrap p {
         font-size: 16px;
     }
 }
+
 @media screen and (max-width:600px) {
     .pin-section .content {
         flex-direction: column;
     }
+
     .pin-section .title_wrap .title h2 {
         font-size: 24px;
     }
+
     .pin-section .title_wrap {
         margin-top: 40px;
         margin-bottom: 36px;
@@ -1733,29 +1912,37 @@ button {
         gap: 30px;
         justify-content: flex-start;
     }
+
     .pin-section .slide .text_wrap h3 {
         font-size: 20px;
-    } 
+    }
+
     .pin-section .content .better-list {
         height: 150px;
         width: 66.66%;
     }
+
     .pin-section .content .right {
         width: 100%;
         height: 70%;
     }
+
     .pin-section .content .blank {
         display: none;
     }
+
     .pin-section .slide .img {
         width: 53.33%;
     }
+
     .pin-section .right .slide {
         gap: 0;
     }
+
     .pin-section .slide .text_wrap {
         width: 72.53%;
     }
+
     .pin-section .slide .text_wrap span {
         margin: 8px 0 12px;
     }
@@ -1962,13 +2149,16 @@ button {
     .benefit {
         height: 1000px;
     }
+
     .benefit .inner .top.act {
         top: 7%;
     }
+
     .benefit .inner .list .list_inner {
         gap: 80px;
         margin-top: 120px;
     }
+
     .benefit .inner .item_wrap .item {
         height: 300px;
     }
@@ -1982,6 +2172,7 @@ button {
     .benefit {
         height: 1800px;
     }
+
     .benefit .inner .list .list_inner {
         gap: 50px;
     }
@@ -2017,13 +2208,16 @@ button {
     .benefit {
         height: 1600px;
     }
+
     .benefit .inner .list .list_inner {
         gap: 50px;
         margin-top: 100px;
     }
+
     .benefit .inner .item_wrap {
         gap: 50px;
     }
+
     .benefit .inner .item_wrap .item {
         height: 300px;
     }
@@ -2033,6 +2227,7 @@ button {
     .benefit {
         height: 1500px;
     }
+
     .benefit .inner .item_wrap .item {
         height: 250px;
     }
@@ -2042,6 +2237,7 @@ button {
     .benefit {
         height: 1400px;
     }
+
     .benefit .inner .item_wrap .item {
         gap: 10px;
     }
