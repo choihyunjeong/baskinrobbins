@@ -23,6 +23,9 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Physics2DPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EasePack.min.js"></script>
+
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
@@ -60,6 +63,8 @@
                 MotionPathPlugin,
                 MotionPathHelper
             );
+
+
 
             gsap.set("#plane", { opacity: 0 });
             gsap.set(".main_visual .container", { opacity: 1 });
@@ -172,9 +177,12 @@
                     "explode"
                 )
 
-            document.querySelector('.main_visual').addEventListener("click", (e) => {
-                tl.play(0)
-            })
+            let main2 = $('.main-02');
+            $('.main_visual').on('click', function(){
+                main2.css('display', 'flex');
+            });
+            
+
 
             var swiper = new Swiper(".newSwiper", {
                 effect: "fade",
@@ -437,131 +445,167 @@
     <main class="main">
         <section class="main_visual">
             <div class="inner">
-                <div class="container" role="image"
-                    aria-label="a big colourful confetti explosion and text saying free for all">
-                    <svg id="explode" viewBox="0 -50 1920 960" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g id="GSAP_GTM_blog_hero_2400x1260">
-                            <g id="wiggle">
-                                <image class="sprinkle" href="img/main-img1.png" x="738" y="120" width="400"
-                                    height="600" />
-                            </g>
-                            <g id="bang">
-                                <g id="Vector">
-                                    <path
-                                        d="M833.956 626.101L747.149 801.943C745.505 805.265 749.467 808.518 752.373 806.239L932.942 664.473C934.689 663.099 937.25 663.708 938.201 665.725L981.674 758.526C983.006 761.361 987.106 761.117 988.092 758.143L1032.59 623.926C1033.4 621.474 1036.49 620.743 1038.31 622.569L1166.26 751.22C1169.02 754.003 1173.56 750.733 1171.79 747.202L1087.08 576.839C1085.69 574.073 1088.34 570.995 1091.26 571.986L1216.42 613.942C1219.88 615.107 1222.55 610.776 1219.97 608.184L1087.3 474.785C1085.49 472.959 1086.21 469.845 1088.65 469.027L1210.09 428.324C1213.81 427.072 1212.93 421.54 1209 421.54H1089.81C1087.04 421.54 1085.4 418.444 1086.94 416.13L1174.11 284.645C1176.08 281.67 1172.86 278 1169.68 279.6L988.922 370.47C987.036 371.409 984.753 370.47 984.096 368.452L939.654 234.374C938.599 231.209 934.136 231.209 933.098 234.374L889.158 366.921C888.345 369.374 885.248 370.104 883.432 368.278L798.528 282.905C796.019 280.383 791.833 282.818 792.732 286.262L825.998 411.382C826.777 414.304 823.75 416.757 821.068 415.382L662.071 333.176C658.56 331.367 655.256 335.924 658.041 338.725L785.432 466.818C787.248 468.645 786.522 471.758 784.083 472.576L662.642 513.279C658.923 514.532 659.805 520.063 663.732 520.063H787.629C790.431 520.063 792.075 523.229 790.466 525.542L697.414 659.22C695.493 661.968 698.175 665.586 701.34 664.508L829.752 621.265C832.676 620.273 835.323 623.335 833.956 626.118V626.101Z"
-                                        fill="url(#paint0_linear_6028_4729)" />
-                                    <path
-                                        d="M833.956 626.101L747.149 801.943C745.505 805.265 749.467 808.518 752.373 806.239L932.942 664.473C934.689 663.099 937.25 663.708 938.201 665.725L981.674 758.526C983.006 761.361 987.106 761.117 988.092 758.143L1032.59 623.926C1033.4 621.474 1036.49 620.743 1038.31 622.569L1166.26 751.22C1169.02 754.003 1173.56 750.733 1171.79 747.202L1087.08 576.839C1085.69 574.073 1088.34 570.995 1091.26 571.986L1216.42 613.942C1219.88 615.107 1222.55 610.776 1219.97 608.184L1087.3 474.785C1085.49 472.959 1086.21 469.845 1088.65 469.027L1210.09 428.324C1213.81 427.072 1212.93 421.54 1209 421.54H1089.81C1087.04 421.54 1085.4 418.444 1086.94 416.13L1174.11 284.645C1176.08 281.67 1172.86 278 1169.68 279.6L988.922 370.47C987.036 371.409 984.753 370.47 984.096 368.452L939.654 234.374C938.599 231.209 934.136 231.209 933.098 234.374L889.158 366.921C888.345 369.374 885.248 370.104 883.432 368.278L798.528 282.905C796.019 280.383 791.833 282.818 792.732 286.262L825.998 411.382C826.777 414.304 823.75 416.757 821.068 415.382L662.071 333.176C658.56 331.367 655.256 335.924 658.041 338.725L785.432 466.818C787.248 468.645 786.522 471.758 784.083 472.576L662.642 513.279C658.923 514.532 659.805 520.063 663.732 520.063H787.629C790.431 520.063 792.075 523.229 790.466 525.542L697.414 659.22C695.493 661.968 698.175 665.586 701.34 664.508L829.752 621.265C832.676 620.273 835.323 623.335 833.956 626.118V626.101Z"
-                                        fill="url(#pattern)" fill-opacity="0.6" />
+                <div class="main-01">
+                    <div class="container" role="image"
+                        aria-label="a big colourful confetti explosion and text saying free for all">
+                        <svg id="explode" viewBox="0 -50 1920 960" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="GSAP_GTM_blog_hero_2400x1260">
+                                <g id="wiggle">
+                                    <image class="sprinkle" href="img/main-img1.png" x="738" y="120" width="400"
+                                        height="600" />
                                 </g>
-                            </g>
-                            <path class="sprinkle"
-                                d="M733.022 222.569L709.927 203.163C709.819 203.073 709.659 203.087 709.569 203.194L690.163 226.289C690.073 226.397 690.087 226.556 690.194 226.647L713.29 246.052C713.397 246.143 713.557 246.129 713.647 246.021L733.053 222.926C733.143 222.819 733.129 222.659 733.022 222.569Z"
-                                fill="#DEC0FC" />
-                            <path id="path"
-                                d="M538.5 556.481C565.165 497.803 621.326 446.333 685.817 449.897C742.695 453.011 791.23 499.923 807.851 554.295C822.28 601.485 806.483 665.329 758.267 675.637C710.051 685.944 669.808 635.984 657.212 588.396C638.16 517.04 652.243 437.987 694.679 377.68C737.115 317.374 806.881 277.006 880.5 270.501"
-                                stroke="#96D7D3" stroke-width="12" stroke-miterlimit="10" stroke-linecap="round" />
-                            <path class="sprinkle" d="M1172.43 119.19C1161.04 107.84 1141.32 122.2 1150.1 137.037"
-                                stroke="#FF783E" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-                            <circle class="sprinkle" cx="1207.5" cy="320.501" r="28.5" fill="#FDECCC" />
-                            <image class="sprinkle" href="img/biscuit1.png" x="730" y="100" width="100" height="289" />
-                            <image id="spin" href="img/chocolate1.png" x="1120" y="160" width="100" height="289" />
-                            <image id="spin" href="img/biscuit2.png" x="990" y="200" width="80" height="289" />
-                            <image class="sprinkle" href="img/chocolate2.png" x="870" y="250" width="50" height="289" />
-                            <image id="spin" href="img/hzimg2.png" x="1080" y="400" width="50" height="289" />
-                            <image class="sprinkle" href="img/hzimg1.png" x="750" y="200" width="40" height="289" />
-                            <image id="spin" href="img/hzimg3.png" x="700" y="370" width="40" height="289" />
-                            <g id="plane">
-                                <g class="innerplane">
-                                    <image href="img/hzimg3.png" width="100" height="289" />
+                                <g id="bang">
+                                    <g id="Vector">
+                                        <path
+                                            d="M833.956 626.101L747.149 801.943C745.505 805.265 749.467 808.518 752.373 806.239L932.942 664.473C934.689 663.099 937.25 663.708 938.201 665.725L981.674 758.526C983.006 761.361 987.106 761.117 988.092 758.143L1032.59 623.926C1033.4 621.474 1036.49 620.743 1038.31 622.569L1166.26 751.22C1169.02 754.003 1173.56 750.733 1171.79 747.202L1087.08 576.839C1085.69 574.073 1088.34 570.995 1091.26 571.986L1216.42 613.942C1219.88 615.107 1222.55 610.776 1219.97 608.184L1087.3 474.785C1085.49 472.959 1086.21 469.845 1088.65 469.027L1210.09 428.324C1213.81 427.072 1212.93 421.54 1209 421.54H1089.81C1087.04 421.54 1085.4 418.444 1086.94 416.13L1174.11 284.645C1176.08 281.67 1172.86 278 1169.68 279.6L988.922 370.47C987.036 371.409 984.753 370.47 984.096 368.452L939.654 234.374C938.599 231.209 934.136 231.209 933.098 234.374L889.158 366.921C888.345 369.374 885.248 370.104 883.432 368.278L798.528 282.905C796.019 280.383 791.833 282.818 792.732 286.262L825.998 411.382C826.777 414.304 823.75 416.757 821.068 415.382L662.071 333.176C658.56 331.367 655.256 335.924 658.041 338.725L785.432 466.818C787.248 468.645 786.522 471.758 784.083 472.576L662.642 513.279C658.923 514.532 659.805 520.063 663.732 520.063H787.629C790.431 520.063 792.075 523.229 790.466 525.542L697.414 659.22C695.493 661.968 698.175 665.586 701.34 664.508L829.752 621.265C832.676 620.273 835.323 623.335 833.956 626.118V626.101Z"
+                                            fill="url(#paint0_linear_6028_4729)" />
+                                        <path
+                                            d="M833.956 626.101L747.149 801.943C745.505 805.265 749.467 808.518 752.373 806.239L932.942 664.473C934.689 663.099 937.25 663.708 938.201 665.725L981.674 758.526C983.006 761.361 987.106 761.117 988.092 758.143L1032.59 623.926C1033.4 621.474 1036.49 620.743 1038.31 622.569L1166.26 751.22C1169.02 754.003 1173.56 750.733 1171.79 747.202L1087.08 576.839C1085.69 574.073 1088.34 570.995 1091.26 571.986L1216.42 613.942C1219.88 615.107 1222.55 610.776 1219.97 608.184L1087.3 474.785C1085.49 472.959 1086.21 469.845 1088.65 469.027L1210.09 428.324C1213.81 427.072 1212.93 421.54 1209 421.54H1089.81C1087.04 421.54 1085.4 418.444 1086.94 416.13L1174.11 284.645C1176.08 281.67 1172.86 278 1169.68 279.6L988.922 370.47C987.036 371.409 984.753 370.47 984.096 368.452L939.654 234.374C938.599 231.209 934.136 231.209 933.098 234.374L889.158 366.921C888.345 369.374 885.248 370.104 883.432 368.278L798.528 282.905C796.019 280.383 791.833 282.818 792.732 286.262L825.998 411.382C826.777 414.304 823.75 416.757 821.068 415.382L662.071 333.176C658.56 331.367 655.256 335.924 658.041 338.725L785.432 466.818C787.248 468.645 786.522 471.758 784.083 472.576L662.642 513.279C658.923 514.532 659.805 520.063 663.732 520.063H787.629C790.431 520.063 792.075 523.229 790.466 525.542L697.414 659.22C695.493 661.968 698.175 665.586 701.34 664.508L829.752 621.265C832.676 620.273 835.323 623.335 833.956 626.118V626.101Z"
+                                            fill="url(#pattern)" fill-opacity="0.6" />
+                                    </g>
                                 </g>
-                            </g>
-                            <path id="path_2"
-                                d="M973.861 226.794C1015.92 240.459 1041.39 136.212 1005.93 135.899C977.513 135.649 990.28 214.204 1046.61 229.17C1089.82 240.65 1168.88 147.886 1092.89 84.6262C1022.57 26.0944 1052.01 288.336 1197.12 209.704"
-                                stroke="#9CD38C" stroke-width="3" stroke-miterlimit="10" />
-                            <path class="sprinkle"
-                                d="M1209.36 520.058C1200.77 520.837 1192.24 522.07 1183.8 523.845C1177.31 525.218 1179.8 535.21 1186.31 533.855C1193.88 532.265 1201.5 531.082 1209.21 530.374C1215.74 529.778 1215.98 519.458 1209.36 520.058Z"
-                                fill="#F4AF38" stroke="#F4AF38" stroke-width="1.5" stroke-miterlimit="10" />
-                            <path class="sprinkle"
-                                d="M816.237 177.713C818.964 185.892 822.12 193.912 825.782 201.719C828.608 207.725 837.761 203.006 834.952 196.986C831.668 189.98 828.767 182.829 826.312 175.491C824.233 169.269 814.133 171.4 816.237 177.713Z"
-                                fill="#F2798F" stroke="#F2798F" stroke-width="1.5" stroke-miterlimit="10" />
-                            <path class="sprinkle"
-                                d="M1155.56 507.934C1152.64 507.082 1150.25 508.853 1149.16 511.444C1147.18 516.21 1145.2 520.99 1143.2 525.751C1142.12 528.327 1144.25 531.431 1146.71 532.149C1149.63 533.001 1152.02 531.229 1153.11 528.638C1155.09 523.873 1157.07 519.107 1159.07 514.331C1160.15 511.755 1158.02 508.651 1155.56 507.934Z"
-                                fill="#F6C4BE" stroke="#F6C4BE" stroke-width="1.5" stroke-miterlimit="10" />
-                            <path class="sprinkle"
-                                d="M816.771 232.868C816.612 235.909 818.885 237.83 821.654 238.29C826.748 239.127 831.856 239.965 836.948 240.817C839.703 241.276 842.237 238.494 842.371 235.933C842.53 232.892 840.257 230.971 837.487 230.511C832.394 229.674 827.3 228.837 822.193 227.984C819.438 227.525 816.905 230.306 816.771 232.868Z"
-                                fill="#FFD183" stroke="#FFD183" stroke-width="1.5" stroke-miterlimit="10" />
-                            <path class="sprinkle"
-                                d="M1155.78 596.226L1147.07 574.282C1146.03 571.668 1142.31 571.051 1140.07 572.243C1137.37 573.689 1137.01 576.679 1138.03 579.241C1140.95 586.559 1143.84 593.872 1146.74 601.186C1147.78 603.8 1151.51 604.417 1153.74 603.225C1156.45 601.778 1156.8 598.789 1155.78 596.226Z"
-                                fill="#594438" stroke="#594438" stroke-width="1.5" stroke-miterlimit="10" />
-                            <path id="line_b_1" class="sprinkle"
-                                d="M946.737 711.212C949.464 719.39 952.62 727.411 956.282 735.218C959.108 741.223 968.261 736.505 965.452 730.485C962.168 723.479 959.267 716.328 956.812 708.99C954.733 702.768 944.633 704.899 946.737 711.212Z"
-                                fill="#F2DAAC" stroke="#F2DAAC" stroke-width="1.5" stroke-miterlimit="10" />
-                            <path class="sprinkle"
-                                d="M823.961 771.534C820.994 776.919 818.34 782.573 816.071 788.532C814.331 793.123 821.749 798.298 823.506 793.714C825.543 788.368 827.863 783.26 830.521 778.421C832.776 774.321 826.252 767.377 823.961 771.534Z"
-                                fill="#B36648" stroke="#B36648" stroke-width="1.5" stroke-miterlimit="10" />
-                            <g id="main">
-                                <image href="img/Group 60.png" x="758" y="390" />
-                            </g><!-- #main end -->
-                            <text id="text" x="738" y="120" text-anchor="middle" font-size="60" fill="#F2B3BF">이달의
-                                맛?</text>
-                        </g><!-- #GSAP_GTM_blog_hero_2400x1260 end -->
-                        <defs>
-                            <linearGradient id="paint0_linear_6028_4729" x1="341.328" y1="165.489" x2="1348.16"
-                                y2="553.463" gradientUnits="userSpaceOnUse">
-                                <stop offset="0.427083" stop-color="#FF8709" />
-                                <stop offset="0.791667" stop-color="#F7BDF8" />
-                            </linearGradient>
-                            <linearGradient id="paint1_linear_6028_4729" x1="695.52" y1="382.901" x2="1221.75"
-                                y2="474.027" gradientUnits="userSpaceOnUse">
-                                <stop offset="0.0242443" stop-color="#0A157A" />
-                                <stop offset="0.93898" stop-color="#9D95FF" />
-                            </linearGradient>
-                            <linearGradient id="paint2_linear_6028_4729" x1="1215.64" y1="306.624" x2="1025.13"
-                                y2="256.799" gradientUnits="userSpaceOnUse">
-                                <stop offset="0.26957" stop-color="#FEC5FB" />
-                                <stop offset="0.838196" stop-color="#00BAE2" />
-                            </linearGradient>
-                            <linearGradient id="paint0_linear_559_5280" x1="413" y1="107" x2="-14.5" y2="578"
-                                gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#1A3E81" />
-                                <stop offset="0.399038" stop-color="#F2B3BF" />
-                                <stop offset="0.629808" stop-color="#F2B3BF" />
-                                <stop offset="1" stop-color="#1E4387" />
-                            </linearGradient>
-                            <linearGradient id="paint1_linear_559_5280" x1="0" y1="575" x2="400" y2="575"
-                                gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#1E4387" />
-                                <stop offset="1" stop-color="#F2B3BF" />
-                            </linearGradient>
-                        </defs>
-                    </svg><!-- #explode end -->
-                </div><!-- .container end -->
-                <div class="confetti">
-                    <img src="https://assets.codepen.io/16327/2D-circles.png" />
-                    <img src="https://assets.codepen.io/16327/2D-keyframe.png" />
-                    <img src="https://assets.codepen.io/16327/2D-lightning.png" />
-                    <img src="https://assets.codepen.io/16327/2D-star.png" />
-                    <img src="https://assets.codepen.io/16327/2D-flower.png" />
-                    <img src="https://assets.codepen.io/16327/3D-cone.png" />
-                    <img src="https://assets.codepen.io/16327/3D-spiral.png" />
-                    <img src="https://assets.codepen.io/16327/3D-spiral.png" />
-                    <img src="https://assets.codepen.io/16327/3D-tunnel.png" />
-                    <img src="https://assets.codepen.io/16327/3D-hoop.png" />
-                    <img src="https://assets.codepen.io/16327/3D-semi.png" />
-                    <img src="https://assets.codepen.io/16327/2D-circles.png" />
-                    <img src="https://assets.codepen.io/16327/2D-keyframe.png" />
-                    <img src="https://assets.codepen.io/16327/2D-lightning.png" />
-                    <img src="https://assets.codepen.io/16327/2D-star.png" />
-                    <img src="https://assets.codepen.io/16327/2D-flower.png" />
-                    <img src="https://assets.codepen.io/16327/3D-cone.png" />
-                    <img src="https://assets.codepen.io/16327/3D-spiral.png" />
-                    <img src="https://assets.codepen.io/16327/3D-spiral.png" />
-                    <img src="https://assets.codepen.io/16327/3D-tunnel.png" />
-                    <img src="https://assets.codepen.io/16327/3D-hoop.png" />
-                    <img src="https://assets.codepen.io/16327/3D-semi.png" />
-                </div><!-- confetti end -->
+                                <path class="sprinkle"
+                                    d="M733.022 222.569L709.927 203.163C709.819 203.073 709.659 203.087 709.569 203.194L690.163 226.289C690.073 226.397 690.087 226.556 690.194 226.647L713.29 246.052C713.397 246.143 713.557 246.129 713.647 246.021L733.053 222.926C733.143 222.819 733.129 222.659 733.022 222.569Z"
+                                    fill="#DEC0FC" />
+                                <path id="path"
+                                    d="M538.5 556.481C565.165 497.803 621.326 446.333 685.817 449.897C742.695 453.011 791.23 499.923 807.851 554.295C822.28 601.485 806.483 665.329 758.267 675.637C710.051 685.944 669.808 635.984 657.212 588.396C638.16 517.04 652.243 437.987 694.679 377.68C737.115 317.374 806.881 277.006 880.5 270.501"
+                                    stroke="#96D7D3" stroke-width="12" stroke-miterlimit="10" stroke-linecap="round" />
+                                <path class="sprinkle" d="M1172.43 119.19C1161.04 107.84 1141.32 122.2 1150.1 137.037"
+                                    stroke="#FF783E" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+                                <circle class="sprinkle" cx="1207.5" cy="320.501" r="28.5" fill="#FDECCC" />
+                                <image class="sprinkle" href="img/biscuit1.png" x="730" y="100" width="100"
+                                    height="289" />
+                                <image id="spin" href="img/chocolate1.png" x="1120" y="160" width="100" height="289" />
+                                <image id="spin" href="img/biscuit2.png" x="990" y="200" width="80" height="289" />
+                                <image class="sprinkle" href="img/chocolate2.png" x="870" y="250" width="50"
+                                    height="289" />
+                                <image id="spin" href="img/hzimg2.png" x="1080" y="400" width="50" height="289" />
+                                <image class="sprinkle" href="img/hzimg1.png" x="750" y="200" width="40" height="289" />
+                                <image id="spin" href="img/hzimg3.png" x="700" y="370" width="40" height="289" />
+                                <g id="plane">
+                                    <g class="innerplane">
+                                        <image href="img/hzimg3.png" width="100" height="289" />
+                                    </g>
+                                </g>
+                                <path id="path_2"
+                                    d="M973.861 226.794C1015.92 240.459 1041.39 136.212 1005.93 135.899C977.513 135.649 990.28 214.204 1046.61 229.17C1089.82 240.65 1168.88 147.886 1092.89 84.6262C1022.57 26.0944 1052.01 288.336 1197.12 209.704"
+                                    stroke="#9CD38C" stroke-width="3" stroke-miterlimit="10" />
+                                <path class="sprinkle"
+                                    d="M1209.36 520.058C1200.77 520.837 1192.24 522.07 1183.8 523.845C1177.31 525.218 1179.8 535.21 1186.31 533.855C1193.88 532.265 1201.5 531.082 1209.21 530.374C1215.74 529.778 1215.98 519.458 1209.36 520.058Z"
+                                    fill="#F4AF38" stroke="#F4AF38" stroke-width="1.5" stroke-miterlimit="10" />
+                                <path class="sprinkle"
+                                    d="M816.237 177.713C818.964 185.892 822.12 193.912 825.782 201.719C828.608 207.725 837.761 203.006 834.952 196.986C831.668 189.98 828.767 182.829 826.312 175.491C824.233 169.269 814.133 171.4 816.237 177.713Z"
+                                    fill="#F2798F" stroke="#F2798F" stroke-width="1.5" stroke-miterlimit="10" />
+                                <path class="sprinkle"
+                                    d="M1155.56 507.934C1152.64 507.082 1150.25 508.853 1149.16 511.444C1147.18 516.21 1145.2 520.99 1143.2 525.751C1142.12 528.327 1144.25 531.431 1146.71 532.149C1149.63 533.001 1152.02 531.229 1153.11 528.638C1155.09 523.873 1157.07 519.107 1159.07 514.331C1160.15 511.755 1158.02 508.651 1155.56 507.934Z"
+                                    fill="#F6C4BE" stroke="#F6C4BE" stroke-width="1.5" stroke-miterlimit="10" />
+                                <path class="sprinkle"
+                                    d="M816.771 232.868C816.612 235.909 818.885 237.83 821.654 238.29C826.748 239.127 831.856 239.965 836.948 240.817C839.703 241.276 842.237 238.494 842.371 235.933C842.53 232.892 840.257 230.971 837.487 230.511C832.394 229.674 827.3 228.837 822.193 227.984C819.438 227.525 816.905 230.306 816.771 232.868Z"
+                                    fill="#FFD183" stroke="#FFD183" stroke-width="1.5" stroke-miterlimit="10" />
+                                <path class="sprinkle"
+                                    d="M1155.78 596.226L1147.07 574.282C1146.03 571.668 1142.31 571.051 1140.07 572.243C1137.37 573.689 1137.01 576.679 1138.03 579.241C1140.95 586.559 1143.84 593.872 1146.74 601.186C1147.78 603.8 1151.51 604.417 1153.74 603.225C1156.45 601.778 1156.8 598.789 1155.78 596.226Z"
+                                    fill="#594438" stroke="#594438" stroke-width="1.5" stroke-miterlimit="10" />
+                                <path id="line_b_1" class="sprinkle"
+                                    d="M946.737 711.212C949.464 719.39 952.62 727.411 956.282 735.218C959.108 741.223 968.261 736.505 965.452 730.485C962.168 723.479 959.267 716.328 956.812 708.99C954.733 702.768 944.633 704.899 946.737 711.212Z"
+                                    fill="#F2DAAC" stroke="#F2DAAC" stroke-width="1.5" stroke-miterlimit="10" />
+                                <path class="sprinkle"
+                                    d="M823.961 771.534C820.994 776.919 818.34 782.573 816.071 788.532C814.331 793.123 821.749 798.298 823.506 793.714C825.543 788.368 827.863 783.26 830.521 778.421C832.776 774.321 826.252 767.377 823.961 771.534Z"
+                                    fill="#B36648" stroke="#B36648" stroke-width="1.5" stroke-miterlimit="10" />
+                                <g id="main">
+                                    <image href="img/Group 60.png" x="758" y="390" />
+                                </g><!-- #main end -->
+                                <text id="text" x="738" y="120" text-anchor="middle" font-size="60" fill="#F2B3BF">이달의
+                                    맛?</text>
+                            </g><!-- #GSAP_GTM_blog_hero_2400x1260 end -->
+                            <defs>
+                                <linearGradient id="paint0_linear_6028_4729" x1="341.328" y1="165.489" x2="1348.16"
+                                    y2="553.463" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0.427083" stop-color="#FF8709" />
+                                    <stop offset="0.791667" stop-color="#F7BDF8" />
+                                </linearGradient>
+                                <linearGradient id="paint1_linear_6028_4729" x1="695.52" y1="382.901" x2="1221.75"
+                                    y2="474.027" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0.0242443" stop-color="#0A157A" />
+                                    <stop offset="0.93898" stop-color="#9D95FF" />
+                                </linearGradient>
+                                <linearGradient id="paint2_linear_6028_4729" x1="1215.64" y1="306.624" x2="1025.13"
+                                    y2="256.799" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0.26957" stop-color="#FEC5FB" />
+                                    <stop offset="0.838196" stop-color="#00BAE2" />
+                                </linearGradient>
+                                <linearGradient id="paint0_linear_559_5280" x1="413" y1="107" x2="-14.5" y2="578"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#1A3E81" />
+                                    <stop offset="0.399038" stop-color="#F2B3BF" />
+                                    <stop offset="0.629808" stop-color="#F2B3BF" />
+                                    <stop offset="1" stop-color="#1E4387" />
+                                </linearGradient>
+                                <linearGradient id="paint1_linear_559_5280" x1="0" y1="575" x2="400" y2="575"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#1E4387" />
+                                    <stop offset="1" stop-color="#F2B3BF" />
+                                </linearGradient>
+                            </defs>
+                        </svg><!-- #explode end -->
+                    </div><!-- .container end -->
+                    <div class="confetti">
+                        <img src="https://assets.codepen.io/16327/2D-circles.png" />
+                        <img src="https://assets.codepen.io/16327/2D-keyframe.png" />
+                        <img src="https://assets.codepen.io/16327/2D-lightning.png" />
+                        <img src="https://assets.codepen.io/16327/2D-star.png" />
+                        <img src="https://assets.codepen.io/16327/2D-flower.png" />
+                        <img src="https://assets.codepen.io/16327/3D-cone.png" />
+                        <img src="https://assets.codepen.io/16327/3D-spiral.png" />
+                        <img src="https://assets.codepen.io/16327/3D-spiral.png" />
+                        <img src="https://assets.codepen.io/16327/3D-tunnel.png" />
+                        <img src="https://assets.codepen.io/16327/3D-hoop.png" />
+                        <img src="https://assets.codepen.io/16327/3D-semi.png" />
+                        <img src="https://assets.codepen.io/16327/2D-circles.png" />
+                        <img src="https://assets.codepen.io/16327/2D-keyframe.png" />
+                        <img src="https://assets.codepen.io/16327/2D-lightning.png" />
+                        <img src="https://assets.codepen.io/16327/2D-star.png" />
+                        <img src="https://assets.codepen.io/16327/2D-flower.png" />
+                        <img src="https://assets.codepen.io/16327/3D-cone.png" />
+                        <img src="https://assets.codepen.io/16327/3D-spiral.png" />
+                        <img src="https://assets.codepen.io/16327/3D-spiral.png" />
+                        <img src="https://assets.codepen.io/16327/3D-tunnel.png" />
+                        <img src="https://assets.codepen.io/16327/3D-hoop.png" />
+                        <img src="https://assets.codepen.io/16327/3D-semi.png" />
+                    </div><!-- confetti end -->
+                </div><!-- .main-01 end -->
+                <div class="main-02" id="main-02">
+                    <img src="img/main-horizonal.png" alt="main">
+                    <div class="promotion">
+                        <h3>Promotion</h3>
+                        <div class="promotion_list">
+                            <div class="promotion_item">
+                                <div class="text_wrap">
+                                    <span>D-5</span>
+                                    <strong>완판신화 메가팩!<br />
+                                        사전예약 한정 31% 할인</strong>
+                                </div><!-- .text-wrap end -->
+                                <img src="img/promotion-img1.png" alt="promotion-img1">
+                            </div><!-- .promotion_item end -->
+                            <div class="promotion_item">
+                                <div class="text_wrap">
+                                    <span>D-5</span>
+                                    <strong>9월 이달의 맛,<br />
+                                        인스타그램에 사진을 올려주세요!</strong>
+                                </div><!-- .text-wrap end -->
+                                <img src="img/promotion-img2.png" alt="promotion-img2">
+                            </div><!-- .promotion_item end -->
+                            <div class="promotion_item">
+                                <div class="text_wrap">
+                                    <span>소진시까지</span>
+                                    <strong>쿼터이상 구매시!<br />
+                                        스머프랜덤키링 2,900원!</strong>
+                                </div><!-- .text-wrap end -->
+                                <img src="img/promotion-img3.png" alt="promotion-img3">
+                            </div><!-- .promotion_item end -->
+                        </div><!-- .promotion_list end -->
+                    </div><!-- .promotion end -->
+                </div><!-- .main-02 end -->
             </div><!-- .inner end -->
         </section><!-- .main_visual end -->
 
